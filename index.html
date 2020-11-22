@@ -1,25 +1,37 @@
 <!DOCTYPE html>
 <html lang="ru">
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="stylesheet" href="./pages/index.css" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Mesto</title>
+	</head>
 
-<head>
-  <meta charset="UTF-8">
-  <link rel="stylesheet" href="./pages/index.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mesto</title>
-</head>
-
-<body class="page">
-  <header class="header page__header">
-<img class="header__logo" src="./images/header__logo.svg" alt="Mesto Russia">
-  </header>
-  <main class="content">
-    <section class="profile content__profile">
-
-    </section>
-    <section class="places content__places">
-
-    </section>
-  </main>
-</body>
-
+	<body class="page">
+		<header class="header page__header">
+			<img
+				class="header__logo"
+				src="./images/header__logo.svg"
+				alt="Mesto Russia"
+			/>
+		</header>
+		<main class="content">
+			<section class="profile content__profile">
+				<div class="profile__container">
+					<img
+						class="profile__avatar"
+						src="./images/profile__avatar.jpg"
+						alt="Портрет"
+					/>
+					<div class="profile__info">
+						<h1 class="profile__title">Жак-Ив Кусто</h1>
+						<p class="profile__subtitle">Исследователь океана</p>
+					</div>
+					<button class="edit-button"></button>
+				</div>
+				<button type="button" class="add-button"></button>
+			</section>
+			<section class="places content__places"></section>
+		</main>
+	</body>
 </html>
