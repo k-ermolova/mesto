@@ -22,7 +22,7 @@
 @import url(../blocks/place/__description/place__description.css);
 @import url(../blocks/place/__title/place__title.css);
 @import url(../blocks/like-button/like-button.css);
-@import url();
-@import url();
-@import url();
+@import url(../blocks/footer/footer.css);
+@import url(../blocks/footer/__copy/footer__copy.css);
+@import url(../blocks/page/__footer/page__footer.css);
 @import url();

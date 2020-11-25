@@ -13,6 +13,6 @@
 	transition: opacity 0.3s ease;
 }
 
-.like-button:active {
+.like-button:focus {
   background: center / contain no-repeat url(../../images/button-4.svg);
 }
