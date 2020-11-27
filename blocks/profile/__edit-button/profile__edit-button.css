@@ -1,20 +1,20 @@
-.edit-button {
+.profile__edit-button {
 	border: none;
   padding: 0;
 	margin: auto 0;
   width: 24px;
 	height: 24px;
   border: 1px solid #fff;
-	background: center / 10px no-repeat url(../../images/button-2.svg);
+	background: center / 10px no-repeat url(../../../images/button-2.svg);
 }
 
-.edit-button:hover {
+.profile__edit-button:hover {
 	opacity: 0.6;
 	transition: opacity 0.3s ease;
 }
 
 @media screen and (max-width: 1023px) {
-	.edit-button {
+	.profile__edit-button {
 		width: 18px;
 		height: 18px;
 		position: absolute;
