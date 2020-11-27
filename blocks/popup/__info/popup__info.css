@@ -1,20 +1,20 @@
 .popup__info {
-  margin: 0;
-  padding: 0;
-  border: none;
-  width: 358px;
-  margin: 0 36px 0 36px;
+	margin: 0;
+	padding: 0;
+	border: none;
+	width: 358px;
+	margin: 0 36px 0 36px;
 }
 
 @media screen and (max-width: 1023px) {
-  .popup__info {
-    width: 282px;
-    margin: 0 22px 0 22px;
-  }
+	.popup__info {
+		width: 282px;
+		margin: 0 22px 0 22px;
+	}
 }
 
 @media screen and (max-width: 550px) {
-  .popup__info {
-    width: calc(100% - 44px);
-  }
+	.popup__info {
+		width: calc(100% - 44px);
+	}
 }

@@ -1,13 +1,13 @@
 .popup__close-button {
 	padding: 0;
-  width: 40px;
-  height: 40px;
-  position: absolute;
-  top: -40px;
-  right: -40px;
-  background: center / contain no-repeat url(../../../images/button-5.svg);
-  border: none;
-  transform: rotate(45deg);
+	width: 40px;
+	height: 40px;
+	position: absolute;
+	top: -40px;
+	right: -40px;
+	background: center / contain no-repeat url(../../../images/button-5.svg);
+	border: none;
+	transform: rotate(45deg);
 }
 
 .popup__close-button:hover {
@@ -16,10 +16,10 @@
 }
 
 @media screen and (max-width: 1023px) {
-  .popup__close-button {
-    top: calc(-26px - 18px);
-    right: -4px;
-    width: 26px;
-    height: 26px;
-  }
+	.popup__close-button {
+		top: calc(-26px - 18px);
+		right: -4px;
+		width: 26px;
+		height: 26px;
+	}
 }

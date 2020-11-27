@@ -10,8 +10,8 @@
 @media screen and (max-width: 1023px) {
 	.popup__heading {
 		font-size: 18px;
-    line-height: 22px;
-    margin: 0 0 0 22px;
-    padding: 25px 0 75px;
+		line-height: 22px;
+		margin: 0 0 0 22px;
+		padding: 25px 0 75px;
 	}
 }
