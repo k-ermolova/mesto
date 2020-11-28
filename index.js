@@ -11,13 +11,13 @@ function formInsert() {
 	jobInput.value = profileSubtitle.textContent;
 }
 
-function closePopup() {
-	formElement.classList.remove("popup_opened");
-}
-
 function openPopup() {
 	formElement.classList.add("popup_opened");
 	formInsert();
+}
+
+function closePopup() {
+	formElement.classList.remove("popup_opened");
 }
 
 function formSubmitHandler(evt) {
@@ -27,6 +27,6 @@ function formSubmitHandler(evt) {
 	closePopup();
 }
 
-closeButton.addEventListener("click", closePopup);
 editButton.addEventListener("click", openPopup);
+closeButton.addEventListener("click", closePopup);
 formElement.addEventListener("submit", formSubmitHandler);
