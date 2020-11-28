@@ -1,5 +1,6 @@
 .profile__subtitle {
 	margin: 0;
+	grid-area: job;
 	font-size: 18px;
 	text-align: left;
 }
