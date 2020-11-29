@@ -6,6 +6,7 @@
 	align-self: center;
 	border: none;
 	background: center / contain no-repeat url(../../../images/button-3.svg);
+	outline: none;
 }
 
 .place__like-button:hover {
