@@ -1,10 +1,10 @@
-let formElement = document.querySelector(".popup");
-let profileTitle = document.querySelector(".profile__title");
-let profileSubtitle = document.querySelector(".profile__subtitle");
-let editButton = document.querySelector(".profile__edit-button");
-let closeButton = formElement.querySelector(".popup__close-button");
-let nameInput = formElement.querySelector(".input-text_type_name");
-let jobInput = formElement.querySelector(".input-text_type_job");
+const formElement = document.querySelector(".popup");
+const profileTitle = document.querySelector(".profile__title");
+const profileSubtitle = document.querySelector(".profile__subtitle");
+const editButton = document.querySelector(".profile__edit-button");
+const closeButton = formElement.querySelector(".popup__close-button");
+const nameInput = formElement.querySelector(".input-text_type_name");
+const jobInput = formElement.querySelector(".input-text_type_job");
 
 function formInsert() {
 	nameInput.value = profileTitle.textContent;
