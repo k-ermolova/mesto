@@ -137,7 +137,7 @@
 		<footer class="footer page__footer">
 			<p class="footer__copy">&copy; 2020 Mesto Russia</p>
 		</footer>
-		<div class="popup">
+		<div class="popup popup_edit">
 			<form class="popup__container" name="edit-form">
 				<button
 					class="popup__close-button"
@@ -162,8 +162,8 @@
 				<button class="popup__save-button" type="submit">Сохранить</button>
 			</form>
 		</div>
-		<div class="popup">
-			<form class="popup__container" name="create-form">
+		<div class="popup popup_create">
+			<form class="popup__container popup__container_create" name="create-form">
 				<button
 					class="popup__close-button"
 					type="button"
@@ -187,6 +187,23 @@
 				<button class="popup__save-button" type="submit">Создать</button>
 			</form>
 		</div>
+		<template id="place-template">
+			<li class="place">
+				<img
+					src=""
+					alt=""
+					class="place__image"
+				/>
+				<div class="place__description">
+					<h3 class="place__title"></h3>
+					<button
+						type="button"
+						class="place__like-button"
+						aria-label="Понравилось"
+					></button>
+				</div>
+			</li>
+		</template>
 		<script src="./scripts/script.js"></script>
 	</body>
 </html>

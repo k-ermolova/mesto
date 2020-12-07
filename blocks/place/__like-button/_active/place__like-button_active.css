@@ -1,0 +1,4 @@
+.place__like-button:active {
+	opacity: 1;
+	background: center / contain no-repeat url(../../../images/button-4.svg);
+}
