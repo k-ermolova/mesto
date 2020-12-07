@@ -8,6 +8,7 @@
 	background: center / contain no-repeat url(../../../images/button-5.svg);
 	border: none;
 	transform: rotate(45deg);
+	outline: none;
 }
 
 .popup__close-button:hover {
