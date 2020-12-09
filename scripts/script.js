@@ -50,28 +50,28 @@ const initialCards = [
 	},
 ];
 
+function composeNewPlace(item) {
+		return `<li class="place">
+	<img
+		src="${item.link}"
+		alt=""
+		class="place__image"
+	/>
+	<div class="place__description">
+		<h3 class="place__title">${item.name}</h3>
+		<button
+			type="button"
+			class="place__like-button"
+			aria-label="Понравилось"
+		></button>
+	</div>
+</li>`;
+	}
+
 const placesContainer = document.querySelector(".places__list");
 function renderPlace() {
 	let newPlace = "";
-	newPlace = initialCards
-		.map((item) => {
-			return `<li class="place">
-		<img
-			src="${item.link}"
-			alt=""
-			class="place__image"
-		/>
-		<div class="place__description">
-			<h3 class="place__title">${item.name}</h3>
-			<button
-				type="button"
-				class="place__like-button"
-				aria-label="Понравилось"
-			></button>
-		</div>
-	</li>`;
-		})
-		.join("");
+	newPlace = initialCards.map(composeNewPlace).join("");
 	placesContainer.insertAdjacentHTML("afterbegin", newPlace);
 }
 
