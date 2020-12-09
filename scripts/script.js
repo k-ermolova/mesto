@@ -13,9 +13,69 @@ const formAdd = document.querySelector(".popup_create");
 
 const addButton = document.querySelector(".profile__add-button");
 const closeAddButton = formAdd.querySelector(".popup__close-button");
-
+/*
 const places = document.querySelector(".places");
-const placesContainer = places.querySelector(".place");
+const placesContainer = places.querySelector(".place"); */
+
+const initialCards = [
+	{
+		name: "Архыз",
+		link:
+			"https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
+	},
+	{
+		name: "Челябинская область",
+		link:
+			"https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
+	},
+	{
+		name: "Иваново",
+		link:
+			"https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
+	},
+	{
+		name: "Камчатка",
+		link:
+			"https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
+	},
+	{
+		name: "Холмогорский район",
+		link:
+			"https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
+	},
+	{
+		name: "Байкал",
+		link:
+			"https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
+	},
+];
+
+const placesContainer = document.querySelector(".places__list");
+function renderPlace() {
+	let newPlace = "";
+	newPlace = initialCards
+		.map((item) => {
+			return `<li class="place">
+		<img
+			src="${item.link}"
+			alt=""
+			class="place__image"
+		/>
+		<div class="place__description">
+			<h3 class="place__title">${item.name}</h3>
+			<button
+				type="button"
+				class="place__like-button"
+				aria-label="Понравилось"
+			></button>
+		</div>
+	</li>`;
+		})
+		.join("");
+	placesContainer.insertAdjacentHTML("afterbegin", newPlace);
+}
+
+renderPlace();
 
 function formInsert() {
 	nameInput.value = profileTitle.textContent;
