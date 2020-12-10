@@ -13,11 +13,13 @@ const addButton = document.querySelector(".profile__add-button");
 const closeAddButton = formAdd.querySelector(".popup__close-button");
 
 const placesContainer = document.querySelector(".places__list"); //контейнер для новых мест на странице
-const placeNameInput = formAdd.querySelector(//форма: название и ссылка на картинку
+const placeNameInput = formAdd.querySelector(
+	//форма: название и ссылка на картинку
 	".input-text_type_heading"
 );
 const placeLinkInput = formAdd.querySelector(".input-text_type_link");
 const templateElement = document.querySelector(".place-template");
+const removeButton = templateElement.querySelector(".place__delete-button");
 
 const initialPlaces = [
 	//список мест
@@ -77,22 +79,24 @@ function formEditSubmit(evt) {
 	closePopup(formEdit); //и закрываем форму
 }
 
-function composePlace({name, link}) {
+function composePlace({ name, link }) {
 	//собираем место
-  const placeElement = templateElement.content.cloneNode("true");
-  const nameElement = placeElement.querySelector(".place__title");
-  const linkElement = placeElement.querySelector(".place__image");
+	const placeElement = templateElement.content.cloneNode("true");
+	const nameElement = placeElement.querySelector(".place__title");
+	const linkElement = placeElement.querySelector(".place__image");
+	const removeButtonElement = placeElement.querySelector(".place__delete-button");
 	nameElement.textContent = name;
 	linkElement.src = link;
+	removeButtonElement.addEventListener("click", removePlace);
 	return placeElement;
 }
 
 function renderPlacesList() {
-const listPlaces = initialPlaces.map(composePlace);
-placesContainer.append(...listPlaces);
+	const listPlaces = initialPlaces.map(composePlace);
+	placesContainer.append(...listPlaces);
 }
 
-function clearPlaceInputs(){
+function clearPlaceInputs() {
 	placeNameInput.value = "";
 	placeLinkInput.value = "";
 }
@@ -100,7 +104,7 @@ function clearPlaceInputs(){
 function addNewPlace() {
 	const placeName = placeNameInput.value;
 	const placeLink = placeLinkInput.value;
-	const newPlace = composePlace({ name: placeName, link: placeLink });	
+	const newPlace = composePlace({ name: placeName, link: placeLink });
 	placesContainer.prepend(newPlace);
 	placeNameInput.value = "";
 	placeLinkInput.value = "";
@@ -111,6 +115,13 @@ function formAddSubmit(evt) {
 	addNewPlace();
 	closePopup(formAdd); //закрываем форму
 }
+
+function removePlace(evt) {
+	const targetElement = evt.target.closest(".place");
+	console.log(targetElement);
+	return targetElement.remove();
+}
+
 renderPlacesList();
 editButton.addEventListener("click", () => openPopup(formEdit)); //*клик на кнопку редактирования - открой форму редактирования
 closeEditButton.addEventListener("click", () => closePopup(formEdit)); //клик на закрыть - закрой форму редактирования
