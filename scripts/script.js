@@ -85,10 +85,14 @@ function composePlace({ name, link }) {
 	const nameElement = placeElement.querySelector(".place__title");
 	const linkElement = placeElement.querySelector(".place__image");
 	const removeButtonElement = placeElement.querySelector(".place__delete-button");
+	const likeButtonElement = placeElement.querySelector(".place__like-button");
 	nameElement.textContent = name;
 	linkElement.src = link;
 	removeButtonElement.addEventListener("click", removePlace);
+	likeButtonElement.addEventListener('click', function (evt) {
+		evt.target.classList.toggle('place__like-button_active')});
 	return placeElement;
+
 }
 
 function renderPlacesList() {
