@@ -43,3 +43,4 @@
 @import url(../blocks/popup/__close-button/_position/_diagonally/popup__close-button_position_diagonally.css);
 @import url(../blocks/popup/__close-button/_position/_top/popup__close-button_position_top.css);
 @import url(../blocks/figure-popup/figure-popup.css);
+@import url(../blocks/place/__delete-button/place__delete-button.css);
