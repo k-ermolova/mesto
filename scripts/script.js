@@ -118,6 +118,7 @@ function formAddSubmit(evt) {
 
 function removePlace(evt) {
 	const targetElement = evt.target.closest(".place");
+	console.log(targetElement);
 	return targetElement.remove();
 }
 
