@@ -1,27 +1,25 @@
-const formEdit = document.querySelector(".popup_edit");
-
-const profileTitle = document.querySelector(".profile__title");
-const profileSubtitle = document.querySelector(".profile__subtitle");
-
+const formEdit = document.querySelector(".popup_edit"); //кнопка редактирования профиля
 const editButton = document.querySelector(".profile__edit-button");
 const closeEditButton = formEdit.querySelector(".popup__close-button");
 
-const nameInput = formEdit.querySelector(".input-text_type_name");
+const profileTitle = document.querySelector(".profile__title"); //страница: имя и работа
+const profileSubtitle = document.querySelector(".profile__subtitle");
+
+const nameInput = formEdit.querySelector(".input-text_type_name"); //форма: имя и работа
 const jobInput = formEdit.querySelector(".input-text_type_job");
 
-const placesContainer = document.querySelector(".places__list");
-const placeNameInput = placesContainer.querySelector(
-	".input-text_type_heading"
-);
-const placeLinkInput = placesContainer.querySelector(".input-text_type_link");
-const templateElement = document.querySelector(".place-template");
-
-const formAdd = document.querySelector(".popup_create");
-
+const formAdd = document.querySelector(".popup_create"); //кнопка добавления нового места
 const addButton = document.querySelector(".profile__add-button");
 const closeAddButton = formAdd.querySelector(".popup__close-button");
 
-const initialCards = [
+const placesContainer = document.querySelector(".places__list"); //контейнер для новых мест на странице
+const placeNameInput = formAdd.querySelector(//форма: название и ссылка на картинку
+	".input-text_type_heading"
+);
+const placeLinkInput = formAdd.querySelector(".input-text_type_link");
+
+const initialPlaces = [
+	//список мест
 	{
 		name: "Архыз",
 		link:
@@ -55,34 +53,68 @@ const initialCards = [
 ];
 
 function formInsert() {
+	//присваиваем полям формы значения имени и работы со страницы
 	nameInput.value = profileTitle.textContent;
 	jobInput.value = profileSubtitle.textContent;
 }
 
 function openPopup(popup) {
+	//открываем форму
 	popup.classList.add("popup_opened");
-	formInsert();
+	formInsert(); //вызываем функцию, которая вносит значения со страницы в форму
 }
 
 function closePopup(popup) {
+	//закрываем форму
 	popup.classList.remove("popup_opened");
 }
 
 function formEditSubmit(evt) {
-	evt.preventDefault();
-	profileTitle.textContent = nameInput.value;
+	evt.preventDefault(); //сбрасываем несохраненные данные
+	profileTitle.textContent = nameInput.value; //делаем обратное присвоение данных страницы из формы
 	profileSubtitle.textContent = jobInput.value;
-	closePopup(formEdit);
+	closePopup(formEdit); //и закрываем форму
+}
+
+function composePlace({name, link}) {
+	//собираем место
+	const templateElement = document.querySelector(".place-template").content;
+	const placeElement = templateElement.cloneNode("true");
+	placeElement.querySelector(".place__title").textContent = name;
+	placeElement.querySelector(".place__image").src = link;
+	placesContainer.append(placeElement);
+}
+
+function renderPlacesList() {
+const listPlaces = initialPlaces.map(composePlace).join('');
+placesContainer.prepend(...listPlaces);
+}
+
+function clearPlaceInputs(){
+	placeNameInput.value = "";
+	placeLinkInput.value = "";
+}
+
+function addNewPlace() {
+	const placeName = placeNameInput.value;
+	const placeLink = placeLinkInput.value;
+	const newPlace = composePlace({ name: placeName, link: placeLink });	
+	placeNameInput.value = "";
+	placeLinkInput.value = "";
+	console.log(newPlace);
+	return newPlace;
 }
 
 function formAddSubmit(evt) {
-	evt.preventDefault();
-	closePopup(formAdd);
+	evt.preventDefault(); //сбрасываем несохраненные данные
+	addNewPlace();
+	closePopup(formAdd); //закрываем форму
+	clearPlaceInputs();
 }
-
-editButton.addEventListener("click", () => openPopup(formEdit));
-closeEditButton.addEventListener("click", () => closePopup(formEdit));
-formEdit.addEventListener("submit", formEditSubmit);
-addButton.addEventListener("click", () => openPopup(formAdd));
+renderPlacesList();
+editButton.addEventListener("click", () => openPopup(formEdit)); //*клик на кнопку редактирования - открой форму редактирования
+closeEditButton.addEventListener("click", () => closePopup(formEdit)); //клик на закрыть - закрой форму редактирования
+formEdit.addEventListener("submit", formEditSubmit); //клик на кнопку сохранить - сохрани новые пользовательские данные и закрой форму
+addButton.addEventListener("click", () => openPopup(formAdd)); //*клик на кнопку добавить - открой форму добавления
 closeAddButton.addEventListener("click", () => closePopup(formAdd));
 formAdd.addEventListener("submit", formAddSubmit);
