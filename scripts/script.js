@@ -70,6 +70,7 @@ function openPopup(popup) {
 function closePopup(popup) {
 	//закрываем форму
 	popup.classList.remove("popup_opened");
+	clearPopupInputs();
 }
 
 function formEditSubmit(evt) {
@@ -100,7 +101,7 @@ function renderPlacesList() {
 	placesContainer.append(...listPlaces);
 }
 
-function clearPlaceInputs() {
+function clearPopupInputs() {
 	placeNameInput.value = "";
 	placeLinkInput.value = "";
 }
@@ -110,14 +111,13 @@ function addNewPlace() {
 	const placeLink = placeLinkInput.value;
 	const newPlace = composePlace({ name: placeName, link: placeLink });
 	placesContainer.prepend(newPlace);
-	placeNameInput.value = "";
-	placeLinkInput.value = "";
 }
 
 function formAddSubmit(evt) {
 	evt.preventDefault(); //сбрасываем несохраненные данные
 	addNewPlace();
 	closePopup(formAdd); //закрываем форму
+	clearPopupInputs();
 }
 
 function removePlace(evt) {
