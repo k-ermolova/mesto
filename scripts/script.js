@@ -21,6 +21,9 @@ const placeLinkInput = formAdd.querySelector(".input-text_type_link");
 const templateElement = document.querySelector(".place-template");
 const removeButton = templateElement.querySelector(".place__delete-button");
 
+const imagePopup = document.querySelector(".figure-popup");
+const closeImagePopup = imagePopup.querySelector(".popup__close-button");
+
 const initialPlaces = [
 	//список мест
 	{
@@ -85,15 +88,19 @@ function composePlace({ name, link }) {
 	const placeElement = templateElement.content.cloneNode("true");
 	const nameElement = placeElement.querySelector(".place__title");
 	const linkElement = placeElement.querySelector(".place__image");
-	const removeButtonElement = placeElement.querySelector(".place__delete-button");
+	const removeButtonElement = placeElement.querySelector(
+		".place__delete-button"
+	);
 	const likeButtonElement = placeElement.querySelector(".place__like-button");
 	nameElement.textContent = name;
 	linkElement.src = link;
 	removeButtonElement.addEventListener("click", removePlace);
-	likeButtonElement.addEventListener('click', function (evt) {
-		evt.target.classList.toggle('place__like-button_active')});
-	return placeElement;
+	likeButtonElement.addEventListener("click", function (evt) {
+		evt.target.classList.toggle("place__like-button_active");
+	});
+	linkElement.addEventListener("click", () => showImagePopup({ name, link }));
 
+	return placeElement;
 }
 
 function renderPlacesList() {
@@ -121,8 +128,17 @@ function formAddSubmit(evt) {
 }
 
 function removePlace(evt) {
-	const targetElement = evt.target.closest(".place");
-	return targetElement.remove();
+	const targetDeleteElement = evt.target.closest(".place");
+	return targetDeleteElement.remove();
+}
+
+function showImagePopup({ name, link }) {
+	const imagePopupName = imagePopup.querySelector(".popup__description");
+	const imagePopupLink = imagePopup.querySelector(".popup__image");
+	imagePopupName.textContent = name;
+	imagePopupLink.src = link;
+	console.log(name);
+	openPopup(imagePopup);
 }
 
 renderPlacesList();
@@ -132,3 +148,4 @@ formEdit.addEventListener("submit", formEditSubmit); //клик на кнопк�
 addButton.addEventListener("click", () => openPopup(formAdd)); //*клик на кнопку добавить - открой форму добавления
 closeAddButton.addEventListener("click", () => closePopup(formAdd));
 formAdd.addEventListener("submit", formAddSubmit);
+closeImagePopup.addEventListener("click", () => closePopup(imagePopup));
