@@ -1,132 +1,84 @@
 <!DOCTYPE html>
 <html lang="ru">
-	<head>
-		<meta charset="UTF-8" />
-		<link rel="stylesheet" href="./pages/index.css" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Mesto</title>
-	</head>
 
-	<body class="page">
-		<header class="header page__header">
-			<img
-				class="header__logo"
-				src="./images/header__logo.svg"
-				alt="Место Россия"
-			/>
-		</header>
-		<main class="content">
-			<section class="profile content__profile">
-				<div class="profile__container">
-					<img
-						class="profile__avatar"
-						src="./images/profile__avatar.jpg"
-						alt="Фотография профиля Жака-Ива Кусто."
-					/>
-					<div class="profile__info">
-						<h1 class="profile__title">Жак-Ив Кусто</h1>
-						<p class="profile__subtitle">Исследователь океана</p>
-						<button
-							class="profile__edit-button"
-							type="button"
-							aria-label="Редактировать профиль"
-						></button>
-					</div>
-				</div>
-				<button
-					type="button"
-					class="profile__add-button"
-					aria-label="Добавить публикацию"
-				></button>
-			</section>
-			<section class="places content__places">
-				<ul class="places__list">
+<head>
+	<meta charset="UTF-8" />
+	<link rel="stylesheet" href="./pages/index.css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Mesto</title>
+</head>
 
-				</ul>
-			</section>
-		</main>
-		<footer class="footer page__footer">
-			<p class="footer__copy">&copy; 2020 Mesto Russia</p>
-		</footer>
-		<div class="popup popup_edit">
-			<form class="popup__container" name="edit-form">
-				<button
-					class="popup__close-button popup__close-button_position_top"
-					type="button"
-					aria-label="Закрыть форму"
-				></button>
-				<h2 class="popup__heading">Редактировать профиль</h2>
-				<fieldset class="popup__info">
-					<input
-						type="text"
-						class="input-text input-text_type_name popup__name"
-						placeholder="Имя"
-						name="name"
-					/>
-					<input
-						type="text"
-						class="input-text input-text_type_job popup__job"
-						placeholder="О себе"
-						name="job"
-					/>
-				</fieldset>
-				<button class="popup__save-button" type="submit">Сохранить</button>
-			</form>
-		</div>
-		<div class="popup popup_create">
-			<form class="popup__container popup__container_create" name="create-form">
-				<button
-					class="popup__close-button popup__close-button_position_diagonally"
-					type="button"
-					aria-label="Закрыть форму"
-				></button>
-				<h2 class="popup__heading">Новое место</h2>
-				<fieldset class="popup__info">
-					<input
-						type="text"
-						class="input-text input-text_type_heading popup__name"
-						placeholder="Название"
-						name="name"
-					/>
-					<input
-						type="url"
-						class="input-text input-text_type_link popup__link"
-						placeholder="Ссылка на картинку"
-						name="link"
-					/>
-				</fieldset>
-				<button class="popup__save-button" type="submit">Создать</button>
-			</form>
-		</div>
-		<div class="popup figure-popup">
-			<figure class="popup__figure">
-				<button
-					class="popup__close-button popup__close-button_position_diagonally"
-					type="button"
-					aria-label="Закрыть форму"
-				></button>
-				<img
-					src=""
-					alt=""
-					class="popup__image"
-				/>
-				<figcaption class="popup__description"></figcaption>
-			</figure>
-		</div>
-		<template class="place-template">
-			<li class="place">
-				<button type = "button" class="place__delete-button" aria-label="Удалить"></button>
-				<img src="" alt="" class="place__image" />
-				<div class="place__description">
-					<h3 class="place__title"></h3>
-					<button
-						type="button"
-						class="place__like-button"
-						aria-label="Понравилось"
-					></button>
+<body class="page">
+	<header class="header page__header">
+		<img class="header__logo" src="./images/header__logo.svg" alt="Место Россия" />
+	</header>
+	<main class="content">
+		<section class="profile content__profile">
+			<div class="profile__container">
+				<img class="profile__avatar" src="./images/profile__avatar.jpg" alt="Фотография профиля Жака-Ива Кусто." />
+				<div class="profile__info">
+					<h1 class="profile__title">Жак-Ив Кусто</h1>
+					<p class="profile__subtitle">Исследователь океана</p>
+					<button class="profile__edit-button" type="button" aria-label="Редактировать профиль"></button>
 				</div>
-			</li>
-		</template>
-		<script src="./scripts/script.js"></script>
-	</body>
+			</div>
+			<button type="button" class="profile__add-button" aria-label="Добавить публикацию"></button>
+		</section>
+		<section class="places content__places">
+			<ul class="places__list">
+
+			</ul>
+		</section>
+	</main>
+	<footer class="footer page__footer">
+		<p class="footer__copy">&copy; 2020 Mesto Russia</p>
+	</footer>
+	<div class="popup popup_edit">
+		<form class="popup__container" name="edit-form">
+			<button class="popup__close-button popup__close-button_position_top" type="button"
+				aria-label="Закрыть форму"></button>
+			<h2 class="popup__heading">Редактировать профиль</h2>
+			<fieldset class="popup__info">
+				<input type="text" class="input-text input-text_type_name popup__name" placeholder="Имя" name="name" />
+				<input type="text" class="input-text input-text_type_job popup__job" placeholder="О себе" name="job" />
+			</fieldset>
+			<button class="popup__save-button" type="submit">Сохранить</button>
+		</form>
+	</div>
+	<div class="popup popup_create">
+		<form class="popup__container popup__container_create" name="create-form">
+			<button class="popup__close-button popup__close-button_position_diagonally" type="button"
+				aria-label="Закрыть форму"></button>
+			<h2 class="popup__heading">Новое место</h2>
+			<fieldset class="popup__info">
+				<input type="text" class="input-text input-text_type_heading popup__name" placeholder="Название" name="name" />
+				<input type="url" class="input-text input-text_type_link popup__link" placeholder="Ссылка на картинку"
+					name="link" />
+			</fieldset>
+			<button class="popup__save-button" type="submit">Создать</button>
+		</form>
+	</div>
+	<div class="popup figure-popup">
+		<figure class="popup__figure">
+			<button class="popup__close-button popup__close-button_position_diagonally" type="button"
+				aria-label="Закрыть форму"></button>
+			<img src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg" alt=""
+				class="popup__image" />
+			<figcaption class="popup__description">Архыз</figcaption>
+		</figure>
+	</div>
+	<template class="place-template">
+		<li class="place">
+			<button type="button" class="place__delete-button" aria-label="Удалить"></button>
+			<img src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg" alt=""
+				class="place__image" />
+			<div class="place__description">
+				<h3 class="place__title">Архыз</h3>
+				<button type="button" class="place__like-button" aria-label="Понравилось"></button>
+			</div>
+		</li>
+	</template>
+	<script src="./scripts/script.js"></script>
+</body>
+
 </html>
