@@ -1,6 +1,6 @@
 const formEdit = document.querySelector(".popup_edit");
 const editButton = document.querySelector(".profile__edit-button");
-const closeEditButton = formEdit.querySelector(".popup__close-button");
+const clickCloseEditButton = formEdit.querySelector(".popup__close-button");
 
 const profileTitle = document.querySelector(".profile__title");
 const profileSubtitle = document.querySelector(".profile__subtitle");
@@ -10,7 +10,7 @@ const jobInput = formEdit.querySelector(".input-text_type_job");
 
 const formAdd = document.querySelector(".popup_create");
 const addButton = document.querySelector(".profile__add-button");
-const closeAddButton = formAdd.querySelector(".popup__close-button");
+const clickCloseAddButton = formAdd.querySelector(".popup__close-button");
 
 const placesContainer = document.querySelector(".places__list");
 const placeNameInput = formAdd.querySelector(".input-text_type_heading");
@@ -19,7 +19,7 @@ const templateElement = document.querySelector(".place-template");
 const removeButton = templateElement.querySelector(".place__delete-button");
 
 const imagePopup = document.querySelector(".figure-popup");
-const closeImagePopup = imagePopup.querySelector(".popup__close-button");
+const clickCloseImagePopup = imagePopup.querySelector(".popup__close-button");
 
 const initialPlaces = [
 	{
@@ -136,9 +136,9 @@ function showImagePopup({ name, link }) {
 
 renderPlacesList();
 editButton.addEventListener("click", () => openPopup(formEdit));
-closeEditButton.addEventListener("click", () => closePopup(formEdit));
+clickCloseEditButton.addEventListener("click", () => closePopup(formEdit));
 formEdit.addEventListener("submit", formEditSubmit);
 addButton.addEventListener("click", () => openPopup(formAdd));
-closeAddButton.addEventListener("click", () => closePopup(formAdd));
+clickCloseAddButton.addEventListener("click", () => closePopup(formAdd));
 formAdd.addEventListener("submit", formAddSubmit);
-closeImagePopup.addEventListener("click", () => closePopup(imagePopup));
+clickCloseImagePopup.addEventListener("click", () => closePopup(imagePopup));
