@@ -19,16 +19,20 @@ const templateElement = document.querySelector(".place-template");
 const removeButton = templateElement.querySelector(".place__delete-button");
 
 const imagePopup = document.querySelector(".figure-popup");
+const imagePopupName = imagePopup.querySelector(".popup__description");
+const imagePopupLink = imagePopup.querySelector(".popup__image");
 const clickCloseImagePopup = imagePopup.querySelector(".popup__close-button");
 
-function formInsert() {
+const formAddInputs = formAdd.querySelector('.popup__container')
+
+function insertForm() {
 	nameInput.value = profileTitle.textContent;
 	jobInput.value = profileSubtitle.textContent;
 }
 
 function openPopup(popup) {
 	popup.classList.add("popup_opened");
-	formInsert();
+	insertForm();
 }
 
 function closePopup(popup) {
@@ -43,6 +47,10 @@ function formEditSubmit(evt) {
 	closePopup(formEdit);
 }
 
+function handleLikeButton(evt) {
+	evt.target.classList.toggle("place__like-button_active");
+}
+
 function composePlace({ name, link }) {
 	const placeElement = templateElement.content.cloneNode("true");
 	const nameElement = placeElement.querySelector(".place__title");
@@ -53,11 +61,9 @@ function composePlace({ name, link }) {
 	const likeButtonElement = placeElement.querySelector(".place__like-button");
 	nameElement.textContent = name;
 	linkElement.src = link;
-	
+
 	removeButtonElement.addEventListener("click", removePlace);
-	likeButtonElement.addEventListener("click", function (evt) {
-		evt.target.classList.toggle("place__like-button_active");
-	});
+	likeButtonElement.addEventListener("click", handleLikeButton);
 	linkElement.addEventListener("click", () => showImagePopup({ name, link }));
 
 	return placeElement;
@@ -69,8 +75,7 @@ function renderPlacesList() {
 }
 
 function clearPopupInputs() {
-	placeNameInput.value = "";
-	placeLinkInput.value = "";
+	formAdd.reset();
 }
 
 function addNewPlace() {
@@ -80,7 +85,7 @@ function addNewPlace() {
 	placesContainer.prepend(newPlace);
 }
 
-function formAddSubmit(evt) {
+function handleAddNewPlace(evt) {
 	evt.preventDefault();
 	addNewPlace();
 	closePopup(formAdd);
@@ -93,11 +98,8 @@ function removePlace(evt) {
 }
 
 function showImagePopup({ name, link }) {
-	const imagePopupName = imagePopup.querySelector(".popup__description");
-	const imagePopupLink = imagePopup.querySelector(".popup__image");
 	imagePopupName.textContent = name;
 	imagePopupLink.src = link;
-	console.log(name);
 	openPopup(imagePopup);
 }
 
@@ -107,5 +109,5 @@ clickCloseEditButton.addEventListener("click", () => closePopup(formEdit));
 formEdit.addEventListener("submit", formEditSubmit);
 addButton.addEventListener("click", () => openPopup(formAdd));
 clickCloseAddButton.addEventListener("click", () => closePopup(formAdd));
-formAdd.addEventListener("submit", formAddSubmit);
+formAdd.addEventListener("submit", handleAddNewPlace);
 clickCloseImagePopup.addEventListener("click", () => closePopup(imagePopup));
