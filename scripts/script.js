@@ -8,13 +8,15 @@ const profileSubtitle = document.querySelector(".profile__subtitle");
 const nameInput = formEdit.querySelector(".input-text_type_name");
 const jobInput = formEdit.querySelector(".input-text_type_job");
 
-const formAdd = document.querySelector(".popup_create");
+const formAdd = document.querySelector(".popup_add");
 const addButton = document.querySelector(".profile__add-button");
 const clickCloseAddButton = formAdd.querySelector(".popup__close-button");
 
 const placesContainer = document.querySelector(".places__list");
 const placeNameInput = formAdd.querySelector(".input-text_type_heading");
 const placeLinkInput = formAdd.querySelector(".input-text_type_link");
+const formAddInputs = formAdd.querySelector(".popup__container");
+
 const templateElement = document.querySelector(".place-template");
 const removeButton = templateElement.querySelector(".place__delete-button");
 
@@ -23,24 +25,26 @@ const imagePopupName = imagePopup.querySelector(".popup__description");
 const imagePopupLink = imagePopup.querySelector(".popup__image");
 const clickCloseImagePopup = imagePopup.querySelector(".popup__close-button");
 
-const formAddInputs = formAdd.querySelector('.popup__container')
-
 function insertForm() {
 	nameInput.value = profileTitle.textContent;
 	jobInput.value = profileSubtitle.textContent;
 }
 
 function openPopup(popup) {
-	popup.classList.add("popup_opened");
-	insertForm();
+	popup.classList.add("popup_opened"); /*
+	insertForm();*/
 }
 
 function closePopup(popup) {
 	popup.classList.remove("popup_opened");
-	clearPopupInputs();
 }
 
-function formEditSubmit(evt) {
+function openFormEdit() {
+	openPopup(formEdit);
+	insertForm();
+}
+
+function handleFormEdit(evt) {
 	evt.preventDefault();
 	profileTitle.textContent = nameInput.value;
 	profileSubtitle.textContent = jobInput.value;
@@ -74,8 +78,8 @@ function renderPlacesList() {
 	placesContainer.append(...listPlaces);
 }
 
-function clearPopupInputs() {
-	formAdd.reset();
+function cleanPopupInputs(form) {
+	form.reset();
 }
 
 function addNewPlace() {
@@ -89,7 +93,7 @@ function handleAddNewPlace(evt) {
 	evt.preventDefault();
 	addNewPlace();
 	closePopup(formAdd);
-	clearPopupInputs();
+	cleanPopupInputs(formAddInputs);
 }
 
 function removePlace(evt) {
@@ -104,9 +108,9 @@ function showImagePopup({ name, link }) {
 }
 
 renderPlacesList();
-editButton.addEventListener("click", () => openPopup(formEdit));
+editButton.addEventListener("click", openFormEdit);
 clickCloseEditButton.addEventListener("click", () => closePopup(formEdit));
-formEdit.addEventListener("submit", formEditSubmit);
+formEdit.addEventListener("submit", handleFormEdit);
 addButton.addEventListener("click", () => openPopup(formAdd));
 clickCloseAddButton.addEventListener("click", () => closePopup(formAdd));
 formAdd.addEventListener("submit", handleAddNewPlace);
