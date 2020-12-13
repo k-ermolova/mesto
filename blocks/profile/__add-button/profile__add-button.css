@@ -7,6 +7,7 @@
 	border-radius: 2px;
 	background: center / 22px no-repeat url(../../../images/button-1.svg);
 	outline: none;
+	cursor: pointer;
 }
 
 .profile__add-button:hover {

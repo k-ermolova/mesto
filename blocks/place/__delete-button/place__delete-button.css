@@ -9,6 +9,7 @@
   top: 18px;
   right: 15px;
   background: center / contain no-repeat url(../../../images/button-6.svg);
+  cursor: pointer;
 }
 
 .place__delete-button:hover {

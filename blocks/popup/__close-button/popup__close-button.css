@@ -9,6 +9,7 @@
 	border: none;
 	transform: rotate(45deg);
 	outline: none;
+	cursor: pointer;
 }
 
 .popup__close-button:hover {
