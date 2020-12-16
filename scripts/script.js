@@ -31,8 +31,7 @@ function insertForm() {
 }
 
 function openPopup(popup) {
-	popup.classList.add("popup_opened"); /*
-	insertForm();*/
+	popup.classList.add("popup_opened");
 }
 
 function closePopup(popup) {
