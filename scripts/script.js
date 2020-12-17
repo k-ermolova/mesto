@@ -38,6 +38,11 @@ function closePopup(popup) {
 	popup.classList.remove("popup_opened");
 }
 
+function closeAddPopupHandler(){
+	cleanPopupInputs(formAddInputs);
+	closePopup(formAdd);
+}
+
 function openFormEdit() {
 	openPopup(formEdit);
 	insertForm();
@@ -111,6 +116,6 @@ editButton.addEventListener("click", openFormEdit);
 clickCloseEditButton.addEventListener("click", () => closePopup(formEdit));
 formEdit.addEventListener("submit", handleFormEdit);
 addButton.addEventListener("click", () => openPopup(formAdd));
-clickCloseAddButton.addEventListener("click", () => closePopup(formAdd));
+clickCloseAddButton.addEventListener("click", closeAddPopupHandler);
 formAdd.addEventListener("submit", handleAddNewPlace);
 clickCloseImagePopup.addEventListener("click", () => closePopup(imagePopup));
