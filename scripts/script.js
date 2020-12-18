@@ -3,7 +3,6 @@ const formEdit = popupEdit.querySelector(".popup__container");
 
 const editButton = document.querySelector(".profile__edit-button");
 const clickCloseEditButton = popupEdit.querySelector(".popup__close-button");
-const saveChangesButton = popupEdit.querySelector(".popup__save-button");
 const profileTitle = document.querySelector(".profile__title");
 const profileSubtitle = document.querySelector(".profile__subtitle");
 
@@ -15,7 +14,6 @@ const formAdd = popupAdd.querySelector(".popup__container");
 
 const addButton = document.querySelector(".profile__add-button");
 const clickCloseAddButton = popupAdd.querySelector(".popup__close-button");
-const addNewPlaceSubmitButton = popupAdd.querySelector(".popup__save-button");
 
 const placesContainer = document.querySelector(".places__list");
 
