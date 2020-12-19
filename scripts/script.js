@@ -52,6 +52,7 @@ function closePopup(popup) {
 function closeAddPopupHandler() {
 	cleanPopupInputs(formAdd);
 	closePopup(popupAdd);
+	closeByEscape(popupAdd);
 }
 
 function openFormEdit() {
@@ -108,7 +109,6 @@ function handleAddNewPlace(evt) {
 	evt.preventDefault();
 	addNewPlace();
 	closePopup(popupAdd);
-	cleanPopupInputs(formAdd);
 }
 
 function removePlace(evt) {
@@ -122,7 +122,19 @@ function showImagePopup({ name, link }) {
 	openPopup(imagePopup);
 }
 
+function closeByEscape (popup) {
+	document.addEventListener("keydown", (evt) => {
+		if (evt.key === "Escape") {
+			closePopup(popup);
+		}
+	});
+}
+closeByEscape(popupAdd);
+closeByEscape(popupEdit);
+closeByEscape(imagePopup);
+
 renderPlacesList();
+
 editButton.addEventListener("click", openFormEdit);
 clickCloseEditButton.addEventListener("click", () => closePopup(popupEdit));
 popupEdit.addEventListener("submit", handleFormEdit);
