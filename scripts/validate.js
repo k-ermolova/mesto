@@ -1,15 +1,12 @@
-function composeError(form, input) {
+function showError(form, input, config) {
 	const errorElement = form.querySelector(`#${input.name}-error`);
 	errorElement.textContent = input.validationMessage;
-}
-
-function showError(form, input, config) {
-	composeError(form, input);
 	input.classList.add(config.inputErrorClass);
 }
 
 function hideError(form, input, config) {
-	composeError(form, input);
+	const errorElement = form.querySelector(`#${input.name}-error`);
+	errorElement.textContent = "";
 	input.classList.remove(config.inputErrorClass);
 }
 
@@ -39,6 +36,13 @@ function setEventListeners(form, config) {
 			checkInputValidity(form, input, config);
 			setButtonState(saveButton, form.checkValidity(), config);
 		});
+	});
+}
+
+function resetValidityCheck(form, config) {
+	const inputList = form.querySelectorAll(config.inputSelector);
+	inputList.forEach((input) => {
+		hideError(form, input, config);
 	});
 }
 

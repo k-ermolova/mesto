@@ -52,11 +52,13 @@ function closePopup(popup) {
 function closeAddPopupHandler() {
 	cleanPopupInputs(formAdd);
 	closePopup(popupAdd);
+	resetValidityCheck(formAdd, validationConfig);
 }
 
 function openFormEdit() {
 	openPopup(popupEdit);
 	insertForm();
+	resetValidityCheck(formEdit, validationConfig);
 	enableValidation(validationConfig);
 }
 
@@ -64,6 +66,7 @@ function handleFormEdit(evt) {
 	evt.preventDefault();
 	profileTitle.textContent = nameInput.value;
 	profileSubtitle.textContent = jobInput.value;
+	resetValidityCheck(formEdit, validationConfig);
 	closePopup(popupEdit);
 }
 
