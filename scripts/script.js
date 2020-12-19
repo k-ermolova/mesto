@@ -58,6 +58,7 @@ function closeAddPopupHandler() {
 function openFormEdit() {
 	openPopup(popupEdit);
 	insertForm();
+	enableValidation(validationConfig);
 }
 
 function handleFormEdit(evt) {

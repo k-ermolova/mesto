@@ -42,10 +42,6 @@ function setEventListeners(form, config) {
 	});
 }
 
-// const formList = document.querySelectorAll(config.formSelector);
-// formList.forEach((form) => {
-// 	setEventListener(form, config);});
-
 function enableValidation(config) {
 	const formList = document.querySelectorAll(config.formSelector);
 	formList.forEach((form) => {
