@@ -62,10 +62,14 @@ function openFormEdit() {
 	enableValidation(validationConfig);
 }
 
-function handleFormEdit(evt) {
-	evt.preventDefault();
+function insertProfileValues() {
 	profileTitle.textContent = nameInput.value;
 	profileSubtitle.textContent = jobInput.value;
+}
+
+function handleFormEdit(evt) {
+	evt.preventDefault();
+	insertProfileValues();
 	resetValidityCheck(formEdit, validationConfig);
 	closePopup(popupEdit);
 }
