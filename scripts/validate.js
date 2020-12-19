@@ -1,3 +1,11 @@
+const validationConfig = {
+	formSelector: ".popup__container",
+	inputSelector: ".input-text",
+	submitButtonSelector: ".popup__save-button",
+	inactiveButtonClass: "popup__save-button_disabled",
+	inputErrorClass: "input-text_state_invalid",
+};
+
 function composeError(form, input) {
 	const errorElement = form.querySelector(`#${input.name}-error`);
 	errorElement.textContent = input.validationMessage;
@@ -31,24 +39,25 @@ function setButtonState(button, isActive, config) {
 	}
 }
 
-function setEventListener(form, config) {
+function setEventListeners(form, config) {
 	const inputList = form.querySelectorAll(config.inputSelector);
 	const saveButton = form.querySelector(config.submitButtonSelector);
-
 	inputList.forEach((input) => {
 		input.addEventListener("input", () => {
 			checkInputValidity(form, input, config);
 			setButtonState(saveButton, form.checkValidity(), config);
 		});
-		console.log(input);
 	});
 }
 
-function enableValidation(config) {
-	const forms = document.querySelectorAll(config.formSelector);
-	forms.forEach((form) => {
-		setEventListener(form, config);
+// const formList = document.querySelectorAll(config.formSelector);
+// formList.forEach((form) => {
+// 	setEventListener(form, config);});
 
+function enableValidation(config) {
+	const formList = document.querySelectorAll(config.formSelector);
+	formList.forEach((form) => {
+		setEventListeners(form, config);
 		form.addEventListener("submit", (evt) => {
 			evt.preventDefault();
 		});
@@ -57,13 +66,5 @@ function enableValidation(config) {
 		setButtonState(saveButton, form.checkValidity(), config);
 	});
 }
-
-const validationConfig = {
-	formSelector: ".popup__container",
-	inputSelector: ".input-text",
-	submitButtonSelector: ".popup__save-button",
-	inactiveButtonClass: "popup__save-button_disabled",
-	inputErrorClass: "input-text_state_invalid",
-};
 
 enableValidation(validationConfig);

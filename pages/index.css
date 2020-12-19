@@ -36,7 +36,6 @@
 @import url(../blocks/popup/__info/popup__info.css);
 @import url(../blocks/input-text/input-text.css);
 @import url(../blocks/input-text/__error/input-text__error.css);
-@import url(../blocks/input-text/__error/_active/input-text__error_active.css);
 @import url(../blocks/input-text/_state/_invalid/input-text_state_invalid.css);
 @import url(../blocks/popup/__name/popup__name.css);
 @import url(../blocks/popup/__job/popup__job.css);
