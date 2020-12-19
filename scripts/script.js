@@ -6,7 +6,7 @@ const clickCloseEditButton = popupEdit.querySelector(".popup__close-button");
 const profileTitle = document.querySelector(".profile__title");
 const profileSubtitle = document.querySelector(".profile__subtitle");
 
-const nameInput = formEdit.querySelector(".input-text_type_name");//инпуты редактирования
+const nameInput = formEdit.querySelector(".input-text_type_name"); //инпуты редактирования
 const jobInput = formEdit.querySelector(".input-text_type_job");
 
 const popupAdd = document.querySelector(".popup_add");
@@ -17,7 +17,7 @@ const clickCloseAddButton = popupAdd.querySelector(".popup__close-button");
 
 const placesContainer = document.querySelector(".places__list");
 
-const placeNameInput = formAdd.querySelector(".input-text_type_heading");//инпуты добавления
+const placeNameInput = formAdd.querySelector(".input-text_type_heading"); //инпуты добавления
 const placeLinkInput = formAdd.querySelector(".input-text_type_link");
 
 const templateElement = document.querySelector(".place-template");
@@ -27,6 +27,14 @@ const imagePopup = document.querySelector(".figure-popup");
 const imagePopupName = imagePopup.querySelector(".popup__description");
 const imagePopupLink = imagePopup.querySelector(".popup__image");
 const clickCloseImagePopup = imagePopup.querySelector(".popup__close-button");
+
+const validationConfig = {
+	formSelector: ".popup__container",
+	inputSelector: ".input-text",
+	submitButtonSelector: ".popup__save-button",
+	inactiveButtonClass: "popup__save-button_disabled",
+	inputErrorClass: "input-text_state_invalid",
+};
 
 function insertForm() {
 	nameInput.value = profileTitle.textContent;
