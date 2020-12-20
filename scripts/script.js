@@ -59,6 +59,11 @@ function openFormEdit() {
 	resetValidityCheck(formEdit, validationConfig);
 }
 
+function openFormAdd() {
+	openPopup(popupAdd);
+	resetForm(popupAdd);
+}
+
 function checkClass(popup) {
 	if (!popup.classList.contains("place__image")) {
 		return true;
@@ -68,7 +73,7 @@ function checkClass(popup) {
 }
 
 function cleanPopupInputs(form) {
-		form.reset();
+	form.reset();
 }
 
 function resetForm(popup) {
@@ -155,7 +160,7 @@ function closeByEscape(evt) {
 }
 
 function closeByOverlay(evt) {
-	if (evt.target.classList.contains("popup_opened")){
+	if (evt.target.classList.contains("popup_opened")) {
 		closePopup(evt.target);
 	}
 }
@@ -166,7 +171,7 @@ clickCloseEditButton.addEventListener("click", () =>
 	cleanAndCloseForm(popupEdit)
 );
 popupEdit.addEventListener("submit", handleFormEdit);
-addButton.addEventListener("click", () => openPopup(popupAdd));
+addButton.addEventListener("click", openFormAdd);
 clickCloseAddButton.addEventListener("click", () =>
 	cleanAndCloseForm(popupAdd)
 );
