@@ -150,13 +150,13 @@ function showImagePopup({ name, link }) {
 function closeByEscape(evt) {
 	const activePopup = document.querySelector(".popup_opened");
 	if (evt.key === "Escape") {
-		cleanAndCloseForm(activePopup);
+		closePopup(activePopup);
 	}
 }
 
 function closeByOverlay(evt) {
 	if (evt.target.classList.contains("popup_opened")){
-		cleanAndCloseForm(evt.target);
+		closePopup(evt.target);
 	}
 }
 
