@@ -153,10 +153,10 @@ function closeByEscape(popup) {
 function closeByOverlay() {
 	const popupList = document.querySelectorAll(".popup");
 	popupList.forEach((popup) => {
-  popup.addEventListener("click", (evt) => {
-		cleanAndCloseForm(evt.target);
+		popup.addEventListener("click", (evt) => {
+			cleanAndCloseForm(evt.target);
+		});
 	});
-});
 }
 
 function setCloseByEscape() {
