@@ -56,10 +56,23 @@ function openFormEdit() {
 	enableValidation(validationConfig);
 }
 
-function cleanAndCloseForm(form, popup) {
-	cleanPopupInputs(form);
-	resetValidityCheck(form, validationConfig);
-	closePopup(popup);
+function checkClass(popup){ 
+	if (!popup.classList.contains("figure-popup")){
+		return true;
+	} else {
+		return false;
+	}
+}
+
+function cleanAndCloseForm(popup) {
+	if (checkClass(popup)) {
+		const form = popup.querySelector(".popup__container");
+		cleanPopupInputs(form);
+		resetValidityCheck(form, validationConfig);
+		closePopup(popup);
+	} else {
+		closePopup(popup);
+	}
 }
 
 function insertProfileValues() {
@@ -129,18 +142,10 @@ function showImagePopup({ name, link }) {
 	openPopup(imagePopup);
 }
 
-function closeByEscape(form, popup) {
+function closeByEscape(popup) {
 	document.addEventListener("keydown", (evt) => {
 		if (evt.key === "Escape") {
-			cleanAndCloseForm(form, popup);
-		}
-	});
-}
-
-function closeImagePopupByEscape(){
-	document.addEventListener("keydown", (evt) => {
-		if (evt.key === "Escape") {
-			closePopup(imagePopup);
+			cleanAndCloseForm(popup);
 		}
 	});
 }
@@ -153,17 +158,17 @@ function closeByOverlay() {
 }
 
 function setCloseByEscape() {
-	closeByEscape(formAdd, popupAdd);
-	closeByEscape(formEdit, popupEdit);
-	closeImagePopupByEscape();
+	closeByEscape(popupAdd);
+	closeByEscape(popupEdit);
+	closeByEscape(imagePopup);
 }
 
 renderPlacesList();
 setCloseByEscape();
 editButton.addEventListener("click", openFormEdit);
-clickCloseEditButton.addEventListener("click", () => cleanAndCloseForm(formEdit, popupEdit));
+clickCloseEditButton.addEventListener("click", () => cleanAndCloseForm(popupEdit));
 popupEdit.addEventListener("submit", handleFormEdit);
 addButton.addEventListener("click", () => openPopup(popupAdd));
-clickCloseAddButton.addEventListener("click", () => cleanAndCloseForm(formAdd, popupAdd));
+clickCloseAddButton.addEventListener("click", () => cleanAndCloseForm(popupAdd));
 popupAdd.addEventListener("submit", handleAddNewPlace);
 clickCloseImagePopup.addEventListener("click", () => closePopup(imagePopup));
