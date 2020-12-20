@@ -6,7 +6,7 @@ const clickCloseEditButton = popupEdit.querySelector(".popup__close-button");
 const profileTitle = document.querySelector(".profile__title");
 const profileSubtitle = document.querySelector(".profile__subtitle");
 
-const nameInput = formEdit.querySelector(".input-text_type_name"); //инпуты редактирования
+const nameInput = formEdit.querySelector(".input-text_type_name");
 const jobInput = formEdit.querySelector(".input-text_type_job");
 
 const popupAdd = document.querySelector(".popup_add");
@@ -17,7 +17,7 @@ const clickCloseAddButton = popupAdd.querySelector(".popup__close-button");
 
 const placesContainer = document.querySelector(".places__list");
 
-const placeNameInput = formAdd.querySelector(".input-text_type_heading"); //инпуты добавления
+const placeNameInput = formAdd.querySelector(".input-text_type_heading");
 const placeLinkInput = formAdd.querySelector(".input-text_type_link");
 
 const templateElement = document.querySelector(".place-template");
@@ -56,8 +56,8 @@ function openFormEdit() {
 	enableValidation(validationConfig);
 }
 
-function checkClass(popup){ 
-	if (!popup.classList.contains("figure-popup")){
+function checkClass(popup) {
+	if (!popup.classList.contains("figure-popup")) {
 		return true;
 	} else {
 		return false;
@@ -153,7 +153,9 @@ function closeByEscape(popup) {
 function closeByOverlay() {
 	const popupList = document.querySelectorAll(".popup");
 	popupList.forEach((popup) => {
-  popup.addEventListener("click", () => closePopup(popup));
+  popup.addEventListener("click", (evt) => {
+		cleanAndCloseForm(evt.target);
+	});
 });
 }
 
@@ -165,10 +167,15 @@ function setCloseByEscape() {
 
 renderPlacesList();
 setCloseByEscape();
+closeByOverlay();
 editButton.addEventListener("click", openFormEdit);
-clickCloseEditButton.addEventListener("click", () => cleanAndCloseForm(popupEdit));
+clickCloseEditButton.addEventListener("click", () =>
+	cleanAndCloseForm(popupEdit)
+);
 popupEdit.addEventListener("submit", handleFormEdit);
 addButton.addEventListener("click", () => openPopup(popupAdd));
-clickCloseAddButton.addEventListener("click", () => cleanAndCloseForm(popupAdd));
+clickCloseAddButton.addEventListener("click", () =>
+	cleanAndCloseForm(popupAdd)
+);
 popupAdd.addEventListener("submit", handleAddNewPlace);
 clickCloseImagePopup.addEventListener("click", () => closePopup(imagePopup));
