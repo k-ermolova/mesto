@@ -42,6 +42,7 @@ function insertForm() {
 
 function openPopup(popup) {
 	popup.classList.add("popup_opened");
+	enableValidation(validationConfig);
 	document.addEventListener("keydown", closeByEscape);
 	document.addEventListener("click", closeByOverlay);
 }
