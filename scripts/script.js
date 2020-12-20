@@ -21,7 +21,6 @@ const placeNameInput = formAdd.querySelector(".input-text_type_heading");
 const placeLinkInput = formAdd.querySelector(".input-text_type_link");
 
 const templateElement = document.querySelector(".place-template");
-const removeButton = templateElement.querySelector(".place__delete-button");
 
 const imagePopup = document.querySelector(".figure-popup");
 const imagePopupName = imagePopup.querySelector(".popup__description");
@@ -43,36 +42,45 @@ function insertForm() {
 
 function openPopup(popup) {
 	popup.classList.add("popup_opened");
+	document.addEventListener("keydown", closeByEscape);
+	document.addEventListener("click", closeByOverlay);
 }
 
 function closePopup(popup) {
 	popup.classList.remove("popup_opened");
+	document.removeEventListener("keydown", closeByEscape);
+	document.removeEventListener("click", closeByOverlay);
 }
 
 function openFormEdit() {
-	openPopup(popupEdit);
 	insertForm();
+	openPopup(popupEdit);
 	resetValidityCheck(formEdit, validationConfig);
-	enableValidation(validationConfig);
 }
 
 function checkClass(popup) {
-	if (!popup.classList.contains("figure-popup")) {
+	if (!popup.classList.contains("place__image")) {
 		return true;
 	} else {
 		return false;
 	}
 }
 
+function cleanPopupInputs(form) {
+		form.reset();
+}
+
+function resetForm(popup) {
+	const form = popup.querySelector(".popup__container");
+	cleanPopupInputs(form);
+	resetValidityCheck(form, validationConfig);
+}
+
 function cleanAndCloseForm(popup) {
 	if (checkClass(popup)) {
-		const form = popup.querySelector(".popup__container");
-		cleanPopupInputs(form);
-		resetValidityCheck(form, validationConfig);
-		closePopup(popup);
-	} else {
-		closePopup(popup);
+		resetForm(popup);
 	}
+	closePopup(popup);
 }
 
 function insertProfileValues() {
@@ -114,10 +122,6 @@ function renderPlacesList() {
 	placesContainer.append(...listPlaces);
 }
 
-function cleanPopupInputs(form) {
-	form.reset();
-}
-
 function addNewPlace() {
 	const placeName = placeNameInput.value;
 	const placeLink = placeLinkInput.value;
@@ -142,32 +146,20 @@ function showImagePopup({ name, link }) {
 	openPopup(imagePopup);
 }
 
-function closeByEscape(popup) {
-	document.addEventListener("keydown", (evt) => {
-		if (evt.key === "Escape") {
-			cleanAndCloseForm(popup);
-		}
-	});
+function closeByEscape(evt) {
+	const activePopup = document.querySelector(".popup_opened");
+	if (evt.key === "Escape") {
+		closePopup(activePopup);
+	}
 }
 
-function closeByOverlay() {
-	const popupList = document.querySelectorAll(".popup");
-	popupList.forEach((popup) => {
-		popup.addEventListener("click", (evt) => {
-			cleanAndCloseForm(evt.target);
-		});
-	});
-}
-
-function setCloseByEscape() {
-	closeByEscape(popupAdd);
-	closeByEscape(popupEdit);
-	closeByEscape(imagePopup);
+function closeByOverlay(evt) {
+	if (evt.target.classList.contains("popup_opened")){
+		closePopup(evt.target);
+	}
 }
 
 renderPlacesList();
-setCloseByEscape();
-closeByOverlay();
 editButton.addEventListener("click", openFormEdit);
 clickCloseEditButton.addEventListener("click", () =>
 	cleanAndCloseForm(popupEdit)
