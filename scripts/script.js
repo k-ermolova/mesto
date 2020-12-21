@@ -42,7 +42,6 @@ function insertForm() {
 
 function openPopup(popup) {
 	popup.classList.add("popup_opened");
-	enableValidation(validationConfig);
 	document.addEventListener("keydown", closeByEscape);
 	document.addEventListener("click", closeByOverlay);
 }
@@ -73,13 +72,16 @@ function checkClass(popup) {
 }
 
 function cleanPopupInputs(form) {
-	form.reset();
+	if (form != formEdit) {
+		form.reset();
+	}
 }
 
 function resetForm(popup) {
 	const form = popup.querySelector(".popup__container");
 	cleanPopupInputs(form);
 	resetValidityCheck(form, validationConfig);
+	enableValidation(validationConfig);
 }
 
 function cleanAndCloseForm(popup) {

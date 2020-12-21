@@ -41,8 +41,10 @@ function setEventListeners(form, config) {
 
 function resetValidityCheck(form, config) {
 	const inputList = form.querySelectorAll(config.inputSelector);
+	const saveButton = form.querySelector(config.submitButtonSelector);
 	inputList.forEach((input) => {
 		hideError(form, input, config);
+		setButtonState(saveButton, form.checkValidity(), config);
 	});
 }
 
@@ -59,4 +61,3 @@ function enableValidation(config) {
 	});
 }
 
-enableValidation(validationConfig);
