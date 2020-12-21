@@ -73,7 +73,8 @@ function resetForm(popup) {
 	const form = popup.querySelector(".popup__container");
 	cleanPopupInputs(form);
 	resetValidityCheck(form, validationConfig);
-	enableValidation(validationConfig);
+	const saveButton = form.querySelector(config.submitButtonSelector);
+	setButtonState(saveButton, form.checkValidity(), config);
 }
 
 function insertProfileValues() {
