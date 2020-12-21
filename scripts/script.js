@@ -63,14 +63,6 @@ function openFormAdd() {
 	resetForm(popupAdd);
 }
 
-function checkClass(popup) {
-	if (!popup.classList.contains("place__image")) {
-		return true;
-	} else {
-		return false;
-	}
-}
-
 function cleanPopupInputs(form) {
 	if (form != formEdit) {
 		form.reset();
@@ -82,13 +74,6 @@ function resetForm(popup) {
 	cleanPopupInputs(form);
 	resetValidityCheck(form, validationConfig);
 	enableValidation(validationConfig);
-}
-
-function cleanAndCloseForm(popup) {
-	if (checkClass(popup)) {
-		resetForm(popup);
-	}
-	closePopup(popup);
 }
 
 function insertProfileValues() {
@@ -170,12 +155,12 @@ function closeByOverlay(evt) {
 renderPlacesList();
 editButton.addEventListener("click", openFormEdit);
 clickCloseEditButton.addEventListener("click", () =>
-	cleanAndCloseForm(popupEdit)
+	closePopup(popupEdit)
 );
 popupEdit.addEventListener("submit", handleFormEdit);
 addButton.addEventListener("click", openFormAdd);
 clickCloseAddButton.addEventListener("click", () =>
-	cleanAndCloseForm(popupAdd)
+	closePopup(popupAdd)
 );
 popupAdd.addEventListener("submit", handleAddNewPlace);
 clickCloseImagePopup.addEventListener("click", () => closePopup(imagePopup));
