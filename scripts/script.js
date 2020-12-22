@@ -73,7 +73,7 @@ function resetForm(popup) {
 	const form = popup.querySelector(".popup__container");
 	cleanPopupInputs(form);
 	resetValidityCheck(form, validationConfig);
-	const saveButton = form.querySelector(config.submitButtonSelector);
+	const saveButton = form.querySelector(".popup__save-button");
 	setButtonState(saveButton, form.checkValidity(), config);
 }
 
