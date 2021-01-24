@@ -1,3 +1,6 @@
+import Card from "./Card.js";
+import { initialPlaces } from "./initial-places.js";
+
 const popupEdit = document.querySelector(".popup_edit");
 const formEdit = popupEdit.querySelector(".popup__container");
 
@@ -63,18 +66,9 @@ function openFormAdd() {
 	resetForm(popupAdd);
 }
 
-function cleanPopupInputs(form) {
-	if (form != formEdit) {
-		form.reset();
-	}
-}
-
-function resetForm(popup) {
-	const form = popup.querySelector(".popup__container");
-	cleanPopupInputs(form);
-	resetValidityCheck(form, validationConfig);
-	const saveButton = form.querySelector(".popup__save-button");
-	setButtonState(saveButton, form.checkValidity(), validationConfig);
+function openImagePopup() {
+	openPopup(imagePopup);
+	
 }
 
 function insertProfileValues() {
@@ -89,55 +83,31 @@ function handleFormEdit(evt) {
 	closePopup(popupEdit);
 }
 
-function handleLikeButton(evt) {
-	evt.target.classList.toggle("place__like-button_active");
-}
-
-function composePlace({ name, link }) {
-	const placeElement = templateElement.content.cloneNode("true");
-	const nameElement = placeElement.querySelector(".place__title");
-	const linkElement = placeElement.querySelector(".place__image");
-	const removeButtonElement = placeElement.querySelector(
-		".place__delete-button"
-	);
-	const likeButtonElement = placeElement.querySelector(".place__like-button");
-	nameElement.textContent = name;
-	linkElement.src = link;
-
-	removeButtonElement.addEventListener("click", removePlace);
-	likeButtonElement.addEventListener("click", handleLikeButton);
-	linkElement.addEventListener("click", () => showImagePopup({ name, link }));
-
-	return placeElement;
-}
-
-function renderPlacesList() {
-	const listPlaces = initialPlaces.map(composePlace);
+function renderPlacesList(places) {
+	const listPlaces = places.map((item) => {
+		const card = new Card(item, ".place-template", openImagePopup);
+		return card.generateCard();
+	});
 	placesContainer.append(...listPlaces);
 }
 
 function addNewPlace() {
-	const placeName = placeNameInput.value;
-	const placeLink = placeLinkInput.value;
-	const newPlace = composePlace({ name: placeName, link: placeLink });
-	placesContainer.prepend(newPlace);
+	const card = new Card(
+		{
+			name: placeNameInput.value,
+			link: placeLinkInput.value,
+		},
+		".place-template",
+		openImagePopup
+	);
+
+	placesContainer.prepend(card.generateCard());
 }
 
 function handleAddNewPlace(evt) {
 	evt.preventDefault();
 	addNewPlace();
 	closePopup(popupAdd);
-}
-
-function removePlace(evt) {
-	const targetDeleteElement = evt.target.closest(".place");
-	return targetDeleteElement.remove();
-}
-
-function showImagePopup({ name, link }) {
-	imagePopupName.textContent = name;
-	imagePopupLink.src = link;
-	openPopup(imagePopup);
 }
 
 function closeByEscape(evt) {
@@ -153,15 +123,11 @@ function closeByOverlay(evt) {
 	}
 }
 
-renderPlacesList();
+renderPlacesList(initialPlaces);
 editButton.addEventListener("click", openFormEdit);
-clickCloseEditButton.addEventListener("click", () =>
-	closePopup(popupEdit)
-);
+clickCloseEditButton.addEventListener("click", () => closePopup(popupEdit));
 popupEdit.addEventListener("submit", handleFormEdit);
 addButton.addEventListener("click", openFormAdd);
-clickCloseAddButton.addEventListener("click", () =>
-	closePopup(popupAdd)
-);
+clickCloseAddButton.addEventListener("click", () => closePopup(popupAdd));
 popupAdd.addEventListener("submit", handleAddNewPlace);
 clickCloseImagePopup.addEventListener("click", () => closePopup(imagePopup));

@@ -1,4 +1,4 @@
-const initialPlaces = [
+export const initialPlaces = [
 	{
 		name: "Архыз",
 		link:
