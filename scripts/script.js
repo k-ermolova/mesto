@@ -26,6 +26,9 @@ const placesContainer = document.querySelector(".places__list");
 const placeNameInput = formAdd.querySelector(".input-text_type_heading");
 const placeLinkInput = formAdd.querySelector(".input-text_type_link");
 
+const imagePopupLink = document.querySelector(".popup__image");
+const imagePopupName = document.querySelector(".popup__description");
+
 const imagePopup = document.querySelector(".figure-popup");
 const clickCloseImagePopup = imagePopup.querySelector(".popup__close-button");
 
@@ -64,8 +67,12 @@ function openFormAdd() {
 	formAddValidation.setButtonState(savePlaceButton, formAdd.checkValidity());
 }
 
-function openImagePopup() {
+function openImagePopup(evt) {
 	openPopup(imagePopup);
+	imagePopupLink.src = evt.target.src;
+	imagePopupName.textContent = evt.target
+		.closest(".place")
+		.querySelector(".place__title").textContent;
 }
 
 function insertProfileValues() {
