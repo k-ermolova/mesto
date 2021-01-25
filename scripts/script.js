@@ -16,6 +16,7 @@ const jobInput = formEdit.querySelector(".input-text_type_job");
 
 const popupAdd = document.querySelector(".popup_add");
 const formAdd = popupAdd.querySelector(".popup__container");
+const savePlaceButton = formAdd.querySelector(".popup__save-button");
 
 const addButton = document.querySelector(".profile__add-button");
 const clickCloseAddButton = popupAdd.querySelector(".popup__close-button");
@@ -60,6 +61,7 @@ function openFormAdd() {
 	formAddValidation.enableValidation();
 	formAddValidation.resetValidityCheck(formAdd);
 	formAdd.reset();
+	formAddValidation.setButtonState(savePlaceButton, formAdd.checkValidity());
 }
 
 function openImagePopup() {
