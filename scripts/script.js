@@ -1,5 +1,7 @@
 import Card from "./Card.js";
 import { initialPlaces } from "./initial-places.js";
+import FormValidator from "./FormValidator.js";
+import { validationConfig } from "./validation-config.js";
 
 const popupEdit = document.querySelector(".popup_edit");
 const formEdit = popupEdit.querySelector(".popup__container");
@@ -30,13 +32,8 @@ const imagePopupName = imagePopup.querySelector(".popup__description");
 const imagePopupLink = imagePopup.querySelector(".popup__image");
 const clickCloseImagePopup = imagePopup.querySelector(".popup__close-button");
 
-const validationConfig = {
-	formSelector: ".popup__container",
-	inputSelector: ".input-text",
-	submitButtonSelector: ".popup__save-button",
-	inactiveButtonClass: "popup__save-button_disabled",
-	inputErrorClass: "input-text_state_invalid",
-};
+const formEditValidation = new FormValidator(formEdit, validationConfig);
+const formAddValidation = new FormValidator(formAdd, validationConfig);
 
 function insertForm() {
 	nameInput.value = profileTitle.textContent;
@@ -58,12 +55,15 @@ function closePopup(popup) {
 function openFormEdit() {
 	insertForm();
 	openPopup(popupEdit);
-	resetValidityCheck(formEdit, validationConfig);
+	formEditValidation.enableValidation();
+	formEditValidation.resetValidityCheck(formEdit);
 }
 
 function openFormAdd() {
 	openPopup(popupAdd);
-	resetForm(popupAdd);
+	formAddValidation.enableValidation();
+	formAddValidation.resetValidityCheck(formAdd);
+	formAdd.reset();
 }
 
 function openImagePopup() {
@@ -79,7 +79,7 @@ function insertProfileValues() {
 function handleFormEdit(evt) {
 	evt.preventDefault();
 	insertProfileValues();
-	resetValidityCheck(formEdit, validationConfig);
+	formEditValidation.resetValidityCheck(formEdit);
 	closePopup(popupEdit);
 }
 
