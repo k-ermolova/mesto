@@ -2,6 +2,7 @@ import Card from "./Card.js";
 import { initialPlaces } from "./initial-places.js";
 import FormValidator from "./FormValidator.js";
 import { validationConfig } from "./validation-config.js";
+import Section from "./Section.js";
 
 const popupEdit = document.querySelector(".popup_edit");
 const formEdit = popupEdit.querySelector(".popup__container");
@@ -30,6 +31,18 @@ const clickCloseImagePopup = imagePopup.querySelector(".popup__close-button");
 
 const formEditValidation = new FormValidator(formEdit, validationConfig);
 const formAddValidation = new FormValidator(formAdd, validationConfig);
+
+const cardList = new Section(
+	{
+		data: initialPlaces,
+		renderer: (item) => {
+			const card = new Card(item, ".place-template");
+			const cardElement = card.generateCard();
+			cardList.addItem(cardElement);
+		},
+	},
+	placesContainer
+);
 
 function insertForm() {
 	nameInput.value = profileTitle.textContent;
@@ -78,30 +91,30 @@ function handleFormEdit(evt) {
 	closePopup(popupEdit);
 }
 
-function renderPlacesList(places) {
-	const listPlaces = places.map((item) => {
-		const card = new Card(item, ".place-template", openImagePopup);
-		return card.generateCard();
-	});
-	placesContainer.append(...listPlaces);
-}
+// function renderPlacesList(places) {
+// 	const listPlaces = places.map((item) => {
+// 		const card = new Card(item, ".place-template", openImagePopup);
+// 		return card.generateCard();
+// 	});
+// 	placesContainer.append(...listPlaces);
+// }
 
-function addNewPlace() {
-	const card = new Card(
-		{
-			name: placeNameInput.value,
-			link: placeLinkInput.value,
-		},
-		".place-template",
-		openImagePopup
-	);
+// function addNewPlace() {
+// 	const card = new Card(
+// 		{
+// 			name: placeNameInput.value,
+// 			link: placeLinkInput.value,
+// 		},
+// 		".place-template",
+// 		openImagePopup
+// 	);
 
-	placesContainer.prepend(card.generateCard());
-}
+// 	placesContainer.prepend(card.generateCard());
+// }
 
 function handleAddNewPlace(evt) {
 	evt.preventDefault();
-	addNewPlace();
+	// addNewPlace();
 	closePopup(popupAdd);
 }
 
@@ -118,7 +131,9 @@ function closeByOverlay(evt) {
 	}
 }
 
-renderPlacesList(initialPlaces);
+cardList.renderItems();
+
+// renderPlacesList(initialPlaces);
 editButton.addEventListener("click", openFormEdit);
 clickCloseEditButton.addEventListener("click", () => closePopup(popupEdit));
 popupEdit.addEventListener("submit", handleFormEdit);
