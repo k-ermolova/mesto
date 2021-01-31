@@ -3,6 +3,7 @@ import { initialPlaces } from "./initial-places.js";
 import FormValidator from "./FormValidator.js";
 import { validationConfig } from "./validation-config.js";
 import Section from "./Section.js";
+import Popup from "./Popup.js";
 
 const popupEdit = document.querySelector(".popup_edit");
 const formEdit = popupEdit.querySelector(".popup__container");
@@ -44,52 +45,52 @@ const cardList = new Section(
 	placesContainer
 );
 
-function insertForm() {
-	nameInput.value = profileTitle.textContent;
-	jobInput.value = profileSubtitle.textContent;
-}
+// function insertForm() {
+// 	nameInput.value = profileTitle.textContent;
+// 	jobInput.value = profileSubtitle.textContent;
+// }
 
-function openPopup(popup) {
-	popup.classList.add("popup_opened");
-	document.addEventListener("keydown", closeByEscape);
-	document.addEventListener("click", closeByOverlay);
-}
+// function openPopup(popup) {
+// 	popup.classList.add("popup_opened");
+// 	document.addEventListener("keydown", closeByEscape);
+// 	document.addEventListener("click", closeByOverlay);
+// }
 
-function closePopup(popup) {
-	popup.classList.remove("popup_opened");
-	document.removeEventListener("keydown", closeByEscape);
-	document.removeEventListener("click", closeByOverlay);
-}
+// function closePopup(popup) {
+// 	popup.classList.remove("popup_opened");
+// 	document.removeEventListener("keydown", closeByEscape);
+// 	document.removeEventListener("click", closeByOverlay);
+// }
 
-function openFormEdit() {
-	insertForm();
-	openPopup(popupEdit);
-	formEditValidation.enableValidation();
-	formEditValidation.resetValidityCheck(formEdit);
-}
+// function openFormEdit() {
+// 	insertForm();
+// 	openPopup(popupEdit);
+formEditValidation.enableValidation();
+formEditValidation.resetValidityCheck(formEdit);
+// }
 
-function openFormAdd() {
-	openPopup(popupAdd);
-	formAddValidation.enableValidation();
-	formAddValidation.resetValidityCheck(formAdd);
-	formAdd.reset();
-}
+// function openFormAdd() {
+// 	openPopup(popupAdd);
+formAddValidation.enableValidation();
+formAddValidation.resetValidityCheck(formAdd);
+// 	formAdd.reset();
+// }
 
-function openImagePopup() {
-	openPopup(imagePopup);
-}
+// function openImagePopup() {
+// 	openPopup(imagePopup);
+// }
 
-function insertProfileValues() {
-	profileTitle.textContent = nameInput.value;
-	profileSubtitle.textContent = jobInput.value;
-}
+// function insertProfileValues() {
+// 	profileTitle.textContent = nameInput.value;
+// 	profileSubtitle.textContent = jobInput.value;
+// }
 
-function handleFormEdit(evt) {
-	evt.preventDefault();
-	insertProfileValues();
-	formEditValidation.resetValidityCheck(formEdit);
-	closePopup(popupEdit);
-}
+// function handleFormEdit(evt) {
+// 	evt.preventDefault();
+// 	insertProfileValues();
+// 	formEditValidation.resetValidityCheck(formEdit);
+// 	closePopup(popupEdit);
+// }
 
 // function renderPlacesList(places) {
 // 	const listPlaces = places.map((item) => {
@@ -112,32 +113,28 @@ function handleFormEdit(evt) {
 // 	placesContainer.prepend(card.generateCard());
 // }
 
-function handleAddNewPlace(evt) {
-	evt.preventDefault();
-	// addNewPlace();
-	closePopup(popupAdd);
-}
+// s
 
-function closeByEscape(evt) {
-	const activePopup = document.querySelector(".popup_opened");
-	if (evt.key === "Escape") {
-		closePopup(activePopup);
-	}
-}
+// function closeByEscape(evt) {
+// 	const activePopup = document.querySelector(".popup_opened");
+// 	if (evt.key === "Escape") {
+// 		closePopup(activePopup);
+// 	}
+// }
 
-function closeByOverlay(evt) {
-	if (evt.target.classList.contains("popup_opened")) {
-		closePopup(evt.target);
-	}
-}
+// function closeByOverlay(evt) {
+// 	if (evt.target.classList.contains("popup_opened")) {
+// 		closePopup(evt.target);
+// 	}
+// }
 
 cardList.renderItems();
 
 // renderPlacesList(initialPlaces);
-editButton.addEventListener("click", openFormEdit);
-clickCloseEditButton.addEventListener("click", () => closePopup(popupEdit));
-popupEdit.addEventListener("submit", handleFormEdit);
-addButton.addEventListener("click", openFormAdd);
-clickCloseAddButton.addEventListener("click", () => closePopup(popupAdd));
-popupAdd.addEventListener("submit", handleAddNewPlace);
-clickCloseImagePopup.addEventListener("click", () => closePopup(imagePopup));
+// editButton.addEventListener("click", openFormEdit);
+// clickCloseEditButton.addEventListener("click", () => closePopup(popupEdit));
+// popupEdit.addEventListener("submit", handleFormEdit);
+// addButton.addEventListener("click", openFormAdd);
+// clickCloseAddButton.addEventListener("click", () => closePopup(popupAdd));
+// popupAdd.addEventListener("submit", handleAddNewPlace);
+// clickCloseImagePopup.addEventListener("click", () => closePopup(imagePopup));
