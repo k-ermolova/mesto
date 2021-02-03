@@ -18,6 +18,7 @@ const jobInput = formEdit.querySelector(".input-text_type_job");
 
 const popupAdd = document.querySelector(".popup_add");
 const formAdd = popupAdd.querySelector(".popup__container");
+const savePlaceButton = formAdd.querySelector(".popup__save-button");
 
 const addButton = document.querySelector(".profile__add-button");
 const clickCloseAddButton = popupAdd.querySelector(".popup__close-button");
@@ -26,6 +27,9 @@ const placesContainer = document.querySelector(".places__list");
 
 const placeNameInput = formAdd.querySelector(".input-text_type_heading");
 const placeLinkInput = formAdd.querySelector(".input-text_type_link");
+
+const imagePopupLink = document.querySelector(".popup__image");
+const imagePopupName = document.querySelector(".popup__description");
 
 const imagePopup = document.querySelector(".figure-popup");
 const clickCloseImagePopup = imagePopup.querySelector(".popup__close-button");

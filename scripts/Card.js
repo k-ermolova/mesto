@@ -1,7 +1,4 @@
 export default class Card {
-	_imagePopupLink = document.querySelector(".popup__image");
-	_imagePopupName = document.querySelector(".popup__description");
-
 	constructor(data, cardSelector, openPopup) {
 		this._title = data.name;
 		this._link = data.link;
@@ -44,10 +41,8 @@ export default class Card {
 
 		this._cardElement
 			.querySelector(".place__image")
-			.addEventListener("click", () => {
-				this._openPopup();
-				this._imagePopupLink.src = this._link;
-				this._imagePopupName.textContent = this._title;
+			.addEventListener("click", (evt) => {
+				this._openPopup(evt);
 			});
 	}
 

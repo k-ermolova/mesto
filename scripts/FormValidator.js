@@ -28,7 +28,7 @@ export default class FormValidator {
 		}
 	}
 
-	_setButtonState(button, isActive) {
+	setButtonState(button, isActive) {
 		if (isActive) {
 			button.classList.remove(this._inactiveButtonClass);
 			button.disabled = false;
@@ -43,7 +43,7 @@ export default class FormValidator {
 		const saveButton = form.querySelector(this._submitButtonSelector);
 		inputList.forEach((input) => {
 			this._hideError(form, input);
-			this._setButtonState(saveButton, form.checkValidity());
+			this.setButtonState(saveButton, form.checkValidity());
 		});
 	}
 
@@ -53,21 +53,18 @@ export default class FormValidator {
 		inputList.forEach((input) => {
 			input.addEventListener("input", () => {
 				this._checkInputValidity(form, input);
-				this._setButtonState(saveButton, form.checkValidity());
+				this.setButtonState(saveButton, form.checkValidity());
 			});
 		});
 	}
 
 	enableValidation() {
-		const formList = document.querySelectorAll(this._formSelector);
-		formList.forEach((form) => {
-			this._setEventListeners(form);
-			form.addEventListener("submit", (evt) => {
-				evt.preventDefault();
-			});
-
-			const saveButton = form.querySelector(this._submitButtonSelector);
-			this._setButtonState(saveButton, form.checkValidity());
+		this._setEventListeners(this._form);
+		this._form.addEventListener("submit", (evt) => {
+			evt.preventDefault();
 		});
+
+		const saveButton = this._form.querySelector(this._submitButtonSelector);
+		this.setButtonState(saveButton, this._form.checkValidity());
 	}
 }
