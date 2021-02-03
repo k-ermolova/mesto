@@ -51,14 +51,14 @@ const cardList = new Section(
 // }
 
 // function openPopup(popup) {
-// 	popup.classList.add("popup_opened");
-// 	document.addEventListener("keydown", closeByEscape);
+// // 	popup.classList.add("popup_opened");
+// // 	document.addEventListener("keydown", closeByEscape);
 // 	document.addEventListener("click", closeByOverlay);
 // }
 
 // function closePopup(popup) {
-// 	popup.classList.remove("popup_opened");
-// 	document.removeEventListener("keydown", closeByEscape);
+// // 	popup.classList.remove("popup_opened");
+// // 	document.removeEventListener("keydown", closeByEscape);
 // 	document.removeEventListener("click", closeByOverlay);
 // }
 
@@ -92,28 +92,26 @@ formAddValidation.resetValidityCheck(formAdd);
 // 	closePopup(popupEdit);
 // }
 
-// function renderPlacesList(places) {
-// 	const listPlaces = places.map((item) => {
-// 		const card = new Card(item, ".place-template", openImagePopup);
-// 		return card.generateCard();
-// 	});
-// 	placesContainer.append(...listPlaces);
-// }
+//// function renderPlacesList(places) {
+//// 	const listPlaces = places.map((item) => {
+//// 		const card = new Card(item, ".place-template", openImagePopup);
+// 	//	return card.generateCard();
+// 	//});
+// 	//placesContainer.append(...listPlaces);
+// //}
 
-// function addNewPlace() {
-// 	const card = new Card(
-// 		{
-// 			name: placeNameInput.value,
-// 			link: placeLinkInput.value,
-// 		},
-// 		".place-template",
-// 		openImagePopup
-// 	);
+//// function addNewPlace() {
+// 	//const card = new Card(
+// 		//{
+// 			//name: placeNameInput.value,
+// 			//link: placeLinkInput.value,
+// 	//	},
+// 		//".place-template",
+// 		//openImagePopup
+// 	//);
 
-// 	placesContainer.prepend(card.generateCard());
-// }
-
-// s
+// 	//placesContainer.prepend(card.generateCard());
+// //}
 
 // function closeByEscape(evt) {
 // 	const activePopup = document.querySelector(".popup_opened");
