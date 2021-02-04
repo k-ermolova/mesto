@@ -5,37 +5,37 @@ import { validationConfig } from "./validation-config.js";
 import Section from "./Section.js";
 import Popup from "./Popup.js";
 
-const popupEdit = document.querySelector(".popup_edit");
-const formEdit = popupEdit.querySelector(".popup__container");
+const popupEdit = new Popup(document.querySelector(".popup_edit"));
+// const formEdit = popupEdit.querySelector(".popup__container");
 
 const editButton = document.querySelector(".profile__edit-button");
-const clickCloseEditButton = popupEdit.querySelector(".popup__close-button");
-const profileTitle = document.querySelector(".profile__title");
-const profileSubtitle = document.querySelector(".profile__subtitle");
+// const clickCloseEditButton = popupEdit.querySelector(".popup__close-button");
+// const profileTitle = document.querySelector(".profile__title");
+// const profileSubtitle = document.querySelector(".profile__subtitle");
 
-const nameInput = formEdit.querySelector(".input-text_type_name");
-const jobInput = formEdit.querySelector(".input-text_type_job");
+// const nameInput = formEdit.querySelector(".input-text_type_name");
+// const jobInput = formEdit.querySelector(".input-text_type_job");
 
-const popupAdd = document.querySelector(".popup_add");
-const formAdd = popupAdd.querySelector(".popup__container");
-const savePlaceButton = formAdd.querySelector(".popup__save-button");
+const popupAdd = new Popup(document.querySelector(".popup_add"));
+// const formAdd = popupAdd.querySelector(".popup__container");
+// const savePlaceButton = formAdd.querySelector(".popup__save-button");
 
 const addButton = document.querySelector(".profile__add-button");
-const clickCloseAddButton = popupAdd.querySelector(".popup__close-button");
+// const clickCloseAddButton = popupAdd.querySelector(".popup__close-button");
 
 const placesContainer = document.querySelector(".places__list");
 
-const placeNameInput = formAdd.querySelector(".input-text_type_heading");
-const placeLinkInput = formAdd.querySelector(".input-text_type_link");
+// const placeNameInput = formAdd.querySelector(".input-text_type_heading");
+// const placeLinkInput = formAdd.querySelector(".input-text_type_link");
 
-const imagePopupLink = document.querySelector(".popup__image");
-const imagePopupName = document.querySelector(".popup__description");
+// const imagePopupLink = document.querySelector(".popup__image");
+// const imagePopupName = document.querySelector(".popup__description");
 
 const imagePopup = document.querySelector(".figure-popup");
-const clickCloseImagePopup = imagePopup.querySelector(".popup__close-button");
+// const clickCloseImagePopup = imagePopup.querySelector(".popup__close-button");
 
-const formEditValidation = new FormValidator(formEdit, validationConfig);
-const formAddValidation = new FormValidator(formAdd, validationConfig);
+// const formEditValidation = new FormValidator(formEdit, validationConfig);
+// const formAddValidation = new FormValidator(formAdd, validationConfig);
 
 const cardList = new Section(
 	{
@@ -66,22 +66,27 @@ const cardList = new Section(
 // 	document.removeEventListener("click", closeByOverlay);
 // }
 
-// function openFormEdit() {
-// 	insertForm();
-// 	openPopup(popupEdit);
-formEditValidation.enableValidation();
-formEditValidation.resetValidityCheck(formEdit);
-// }
+function openFormEdit() {
+	// 	insertForm();
+	popupEdit.open();
+	// formEditValidation.enableValidation();
+	// formEditValidation.resetValidityCheck(formEdit);
+}
 
-// function openFormAdd() {
-// 	openPopup(popupAdd);
-formAddValidation.enableValidation();
-formAddValidation.resetValidityCheck(formAdd);
-// 	formAdd.reset();
-// }
+function openFormAdd() {
+	popupAdd.open();
+	// formAddValidation.enableValidation();
+	//formAddValidation.resetValidityCheck(formAdd);
+	// 	formAdd.reset();
+	// formAddValidation.setButtonState(savePlaceButton, formAdd.checkValidity());
+}
 
-// function openImagePopup() {
+// function openImagePopup(evt) {
 // 	openPopup(imagePopup);
+// imagePopupLink.src = evt.target.src;
+// imagePopupName.textContent = evt.target
+// 	.closest(".place")
+// 	.querySelector(".place__title").textContent;
 // }
 
 // function insertProfileValues() {
@@ -117,7 +122,11 @@ formAddValidation.resetValidityCheck(formAdd);
 // 	placesContainer.prepend(card.generateCard());
 // }
 
-// s
+// function handleAddNewPlace(evt) {
+// 	evt.preventDefault();
+// 	addNewPlace();
+// 	closePopup(popupAdd);
+// }
 
 // function closeByEscape(evt) {
 // 	const activePopup = document.querySelector(".popup_opened");
@@ -135,10 +144,10 @@ formAddValidation.resetValidityCheck(formAdd);
 cardList.renderItems();
 
 // renderPlacesList(initialPlaces);
-// editButton.addEventListener("click", openFormEdit);
-// clickCloseEditButton.addEventListener("click", () => closePopup(popupEdit));
+editButton.addEventListener("click", openFormEdit);
+// clickCloseEditButton.addEventListener("click", () => popupEdit.close());
 // popupEdit.addEventListener("submit", handleFormEdit);
-// addButton.addEventListener("click", openFormAdd);
-// clickCloseAddButton.addEventListener("click", () => closePopup(popupAdd));
+addButton.addEventListener("click", openFormAdd);
+// clickCloseAddButton.addEventListener("click", () => popupAdd);
 // popupAdd.addEventListener("submit", handleAddNewPlace);
 // clickCloseImagePopup.addEventListener("click", () => closePopup(imagePopup));
