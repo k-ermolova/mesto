@@ -102,7 +102,6 @@ function openImagePopup(evt) {
 // 	closePopup(popupEdit);
 // }
 
-
 // function addNewPlace() {
 // 	const card = new Card(
 // 		{
@@ -121,7 +120,6 @@ function openImagePopup(evt) {
 // 	addNewPlace();
 // 	closePopup(popupAdd);
 // }
-
 
 // function closeByOverlay(evt) {
 // 	if (evt.target.classList.contains("popup_opened")) {
