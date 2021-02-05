@@ -83,7 +83,7 @@ function openFormAdd() {
 }
 
 function openImagePopup(evt) {
-	imagePopup.open();
+	imagePopup.open(imagePopupName, imagePopupLink);
 	imagePopupLink.src = evt.target.src;
 	imagePopupName.textContent = evt.target
 		.closest(".place")
