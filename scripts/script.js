@@ -63,9 +63,17 @@ popupEdit.setEventListeners();
 
 const popupAdd = new PopupWithForm({
 	popupSelector: document.querySelector(".popup_add"),
-	handleFormSubmit: {
-		name: placeNameInput,
-		link: placeLinkInput,
+	handleFormSubmit: () => {
+		const card = new Card(
+			{
+				name: placeNameInput.value,
+				link: placeLinkInput.value,
+			},
+			".place-template",
+			openImagePopup
+		);
+		placesContainer.prepend(card.generateCard());
+		popupAdd.close();
 	},
 });
 popupAdd.setEventListeners();
@@ -94,32 +102,6 @@ function openImagePopup(evt) {
 		.closest(".place")
 		.querySelector(".place__title").textContent;
 }
-
-// function handleFormEdit(evt) {
-// 	evt.preventDefault();
-// 	insertProfileValues();
-// 	formEditValidation.resetValidityCheck(formEdit);
-// 	closePopup(popupEdit);
-// }
-
-// function addNewPlace() {
-// 	const card = new Card(
-// 		{
-// 			name: placeNameInput.value,
-// 			link: placeLinkInput.value,
-// 		},
-// 		".place-template",
-// 		openImagePopup
-// 	);
-
-// 	placesContainer.prepend(card.generateCard());
-// }
-
-// function handleAddNewPlace(evt) {
-// 	evt.preventDefault();
-// 	addNewPlace();
-// 	closePopup(popupAdd);
-// }
 
 cardList.renderItems();
 
