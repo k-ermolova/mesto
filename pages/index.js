@@ -1,33 +1,28 @@
-import Card from "./Card.js";
-import { initialPlaces } from "./initial-places.js";
-import FormValidator from "./FormValidator.js";
-import { validationConfig } from "./validation-config.js";
-import Section from "./Section.js";
-import PopupWithImage from "./PopupWithImage.js";
-import PopupWithForm from "./PopupWithForm.js";
-import UserInfo from "./UserInfo.js";
+import Card from "../components/Card.js";
+import FormValidator from "../components/FormValidator.js";
+import Section from "../components/Section.js";
+import PopupWithImage from "../components/PopupWithImage.js";
+import PopupWithForm from "../components/PopupWithForm.js";
+import UserInfo from "../components/UserInfo.js";
 
-const formEdit = document.forms["edit-form"];
-
-const editButton = document.querySelector(".profile__edit-button");
-const profileTitle = document.querySelector(".profile__title");
-const profileSubtitle = document.querySelector(".profile__subtitle");
-
-const nameInput = formEdit.querySelector(".input-text_type_name");
-const jobInput = formEdit.querySelector(".input-text_type_job");
-
-const formAdd = document.forms["add-form"];
-
-const savePlaceButton = formAdd.querySelector(".popup__save-button");
-const addButton = document.querySelector(".profile__add-button");
-
-const placesContainer = document.querySelector(".places__list");
-
-const placeNameInput = formAdd.querySelector(".input-text_type_heading");
-const placeLinkInput = formAdd.querySelector(".input-text_type_link");
-
-const imagePopupLink = document.querySelector(".popup__image");
-const imagePopupName = document.querySelector(".popup__description");
+import {
+	initialPlaces,
+	validationConfig,
+	formEdit,
+	editButton,
+	profileTitle,
+	profileSubtitle,
+	nameInput,
+	jobInput,
+	formAdd,
+	savePlaceButton,
+	addButton,
+	placesContainer,
+	placeNameInput,
+	placeLinkInput,
+	imagePopupLink,
+	imagePopupName,
+} from "../utils/constants.js";
 
 const formEditValidation = new FormValidator(formEdit, validationConfig);
 const formAddValidation = new FormValidator(formAdd, validationConfig);
