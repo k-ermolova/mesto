@@ -26,17 +26,11 @@ const placesContainer = document.querySelector(".places__list");
 const placeNameInput = formAdd.querySelector(".input-text_type_heading");
 const placeLinkInput = formAdd.querySelector(".input-text_type_link");
 
-// const imagePopupLink = document.querySelector(".popup__image");
-// const imagePopupName = document.querySelector(".popup__description");
-
-const imagePopup = new PopupWithImage(document.querySelector(".figure-popup"));
-// const clickCloseImagePopup = imagePopup.querySelector(".popup__close-button");
+const imagePopupLink = document.querySelector(".popup__image");
+const imagePopupName = document.querySelector(".popup__description");
 
 const formEditValidation = new FormValidator(formEdit, validationConfig);
-const formAddValidation = new FormValidator(
-	document.forms["add-form"],
-	validationConfig
-);
+const formAddValidation = new FormValidator(formAdd, validationConfig);
 
 const userInfo = new UserInfo(profileTitle, profileSubtitle);
 
@@ -44,13 +38,16 @@ const cardList = new Section(
 	{
 		data: initialPlaces,
 		renderer: (item) => {
-			const card = new Card(item, ".place-template");
+			const card = new Card(item, ".place-template", openImagePopup);
 			const cardElement = card.generateCard();
 			cardList.addItem(cardElement);
 		},
 	},
 	placesContainer
 );
+
+const imagePopup = new PopupWithImage(document.querySelector(".figure-popup"));
+imagePopup.setEventListeners();
 
 const popupEdit = new PopupWithForm({
 	popupSelector: document.querySelector(".popup_edit"),
@@ -106,7 +103,4 @@ function openImagePopup(evt) {
 cardList.renderItems();
 
 editButton.addEventListener("click", openFormEdit);
-// popupEdit.addEventListener("submit", handleFormEdit);
 addButton.addEventListener("click", openFormAdd);
-// popupAdd.addEventListener("submit", handleAddNewPlace);
-// clickCloseImagePopup.addEventListener("click", () => closePopup(imagePopup));
