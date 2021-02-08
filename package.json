@@ -1,0 +1,19 @@
+{
+  "name": "mesto",
+  "version": "1.0.0",
+  "description": "Проект студентов курса 'веб-разработчик' в Яндекс.Практикуме.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mysoulterious/mesto.git"
+  },
+  "author": "Ermolova Ksenia",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mysoulterious/mesto/issues"
+  },
+  "homepage": "https://github.com/mysoulterious/mesto#readme"
+}
