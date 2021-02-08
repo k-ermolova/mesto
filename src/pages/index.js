@@ -24,6 +24,8 @@ import {
 	imagePopupName,
 } from "../utils/constants.js";
 
+import "./index.css";
+
 const formEditValidation = new FormValidator(formEdit, validationConfig);
 const formAddValidation = new FormValidator(formAdd, validationConfig);
 
