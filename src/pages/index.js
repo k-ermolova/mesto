@@ -18,10 +18,6 @@ import {
 	savePlaceButton,
 	addButton,
 	placesContainer,
-	placeNameInput,
-	placeLinkInput,
-	imagePopupLink,
-	imagePopupName,
 } from "../utils/constants.js";
 
 import "./index.css";
@@ -35,19 +31,18 @@ const cardList = new Section(
 	{
 		data: initialPlaces,
 		renderer: (item) => {
-			const card = new Card(item, ".place-template", openImagePopup);
-			const cardElement = card.generateCard();
-			cardList.addItem(cardElement);
+			const cardItem = createCard(item, ".place-template", openImagePopup);
+			cardList.addItem(cardItem);
 		},
 	},
 	placesContainer
 );
 
-const imagePopup = new PopupWithImage(document.querySelector(".figure-popup"));
+const imagePopup = new PopupWithImage(".figure-popup");
 imagePopup.setEventListeners();
 
 const popupEdit = new PopupWithForm({
-	popupSelector: document.querySelector(".popup_edit"),
+	popupSelector: ".popup_edit",
 	handleFormSubmit: (item) => {
 		userInfo.setUserInfo(item);
 		popupEdit.close();
@@ -56,21 +51,23 @@ const popupEdit = new PopupWithForm({
 popupEdit.setEventListeners();
 
 const popupAdd = new PopupWithForm({
-	popupSelector: document.querySelector(".popup_add"),
-	handleFormSubmit: () => {
-		const card = new Card(
-			{
-				name: placeNameInput.value,
-				link: placeLinkInput.value,
-			},
-			".place-template",
-			openImagePopup
-		);
-		placesContainer.prepend(card.generateCard());
+	popupSelector: ".popup_add",
+	handleFormSubmit: (data) => {
+		const cardData = {
+			name: data["place-name"],
+			link: data["link"],
+		};
+		const card = createCard(cardData, ".place-template", openImagePopup);
+		cardList.prependItem(card);
 		popupAdd.close();
 	},
 });
 popupAdd.setEventListeners();
+
+function createCard(item, cardSelector, handleCardClick) {
+	const card = new Card(item, cardSelector, handleCardClick).generateCard();
+	return card;
+}
 
 function openFormEdit() {
 	const profileInfo = userInfo.getUserInfo();
@@ -89,12 +86,8 @@ function openFormAdd() {
 	formAddValidation.setButtonState(savePlaceButton, formAdd.checkValidity());
 }
 
-function openImagePopup(evt) {
-	imagePopup.open(imagePopupName, imagePopupLink);
-	imagePopupLink.src = evt.target.src;
-	imagePopupName.textContent = evt.target
-		.closest(".place")
-		.querySelector(".place__title").textContent;
+function openImagePopup(link, title) {
+	imagePopup.open(title, link);
 }
 
 cardList.renderItems();

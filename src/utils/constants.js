@@ -55,12 +55,6 @@ const addButton = document.querySelector(".profile__add-button");
 
 const placesContainer = document.querySelector(".places__list");
 
-const placeNameInput = formAdd.querySelector(".input-text_type_heading");
-const placeLinkInput = formAdd.querySelector(".input-text_type_link");
-
-const imagePopupLink = document.querySelector(".popup__image");
-const imagePopupName = document.querySelector(".popup__description");
-
 export {
   initialPlaces,
 	validationConfig,
@@ -74,8 +68,4 @@ export {
 	savePlaceButton,
 	addButton,
 	placesContainer,
-	placeNameInput,
-	placeLinkInput,
-	imagePopupLink,
-	imagePopupName,
 };

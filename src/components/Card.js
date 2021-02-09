@@ -39,20 +39,19 @@ export default class Card {
 				this._handleRemoveButton();
 			});
 
-		this._cardElement
-			.querySelector(".place__image")
-			.addEventListener("click", (evt) => {
-				this._openPopup(evt);
-			});
+		this._cardImage.addEventListener("click", () => {
+			this._openPopup(this._link, this._title);
+		});
 	}
 
 	generateCard() {
 		this._cardElement = this._getTemplate();
-		this._setEventListeners();
-
-		this._cardElement.querySelector(".place__image").src = this._link;
+		this._cardImage = this._cardElement.querySelector(".place__image");
+		this._cardImage.src = this._link;
+		this._cardImage.alt = this._title;
 		this._cardElement.querySelector(".place__title").textContent = this._title;
 
+		this._setEventListeners();
 		return this._cardElement;
 	}
 }
