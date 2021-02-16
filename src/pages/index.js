@@ -4,9 +4,9 @@ import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
+import Api from "../components/Api.js";
 
 import {
-	initialPlaces,
 	validationConfig,
 	formEdit,
 	editButton,
@@ -22,21 +22,21 @@ import {
 
 import "./index.css";
 
+const api = new Api({
+	baseUrl: "https://mesto.nomoreparties.co/v1/cohort-20/",
+	headers: {
+		"content-type": "application/json",
+		authorization: "0949ddb6-de07-424c-aec4-470c89dc006f",
+	},
+});
+api.getInitialCards().then((data) => {
+	createCardList(data);
+});
+
 const formEditValidation = new FormValidator(formEdit, validationConfig);
 const formAddValidation = new FormValidator(formAdd, validationConfig);
 
 const userInfo = new UserInfo(profileTitle, profileSubtitle);
-
-const cardList = new Section(
-	{
-		data: initialPlaces,
-		renderer: (item) => {
-			const cardItem = createCard(item, ".place-template", openImagePopup);
-			cardList.addItem(cardItem);
-		},
-	},
-	placesContainer
-);
 
 const imagePopup = new PopupWithImage(".figure-popup");
 imagePopup.setEventListeners();
@@ -64,6 +64,20 @@ const popupAdd = new PopupWithForm({
 });
 popupAdd.setEventListeners();
 
+function createCardList(cards) {
+	const cardList = new Section(
+		{
+			data: cards,
+			renderer: (item) => {
+				const cardItem = createCard(item, ".place-template", openImagePopup);
+				cardList.addItem(cardItem);
+			},
+		},
+		placesContainer
+	);
+	cardList.renderItems();
+}
+
 function createCard(item, cardSelector, handleCardClick) {
 	const card = new Card(item, cardSelector, handleCardClick).generateCard();
 	return card;
@@ -89,8 +103,6 @@ function openFormAdd() {
 function openImagePopup(link, title) {
 	imagePopup.open(title, link);
 }
-
-cardList.renderItems();
 
 editButton.addEventListener("click", openFormEdit);
 addButton.addEventListener("click", openFormAdd);
