@@ -29,9 +29,6 @@ const api = new Api({
 		authorization: "0949ddb6-de07-424c-aec4-470c89dc006f",
 	},
 });
-api.getInitialCards().then((data) => {
-	createCardList(data);
-});
 
 const formEditValidation = new FormValidator(formEdit, validationConfig);
 const formAddValidation = new FormValidator(formAdd, validationConfig);
@@ -64,6 +61,24 @@ const popupAdd = new PopupWithForm({
 });
 popupAdd.setEventListeners();
 
+api
+.getInitialCards()
+.then((data) => {
+	createCardList(data);
+})
+.catch((err) => {
+	console.log(err);
+})
+
+api
+.getUserInfo()
+.then((data) => {
+	userInfo.setUserInfo(data);
+})
+.catch((err) => {
+	console.log(err);
+})
+
 function createCardList(cards) {
 	const cardList = new Section(
 		{
@@ -86,7 +101,7 @@ function createCard(item, cardSelector, handleCardClick) {
 function openFormEdit() {
 	const profileInfo = userInfo.getUserInfo();
 	nameInput.value = profileInfo.name;
-	jobInput.value = profileInfo.job;
+	jobInput.value = profileInfo.about;
 	popupEdit.open();
 	formEditValidation.enableValidation();
 	formEditValidation.resetValidityCheck(formEdit);

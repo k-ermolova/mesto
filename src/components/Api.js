@@ -1,14 +1,40 @@
-export default class Api{
-  constructor(options){
-    this._headers = options.headers;
-  }
+export default class Api {
+	constructor(options) {
+		this._url = options.baseUrl;
+		this._headers = options.headers;
+	}
 
-  getInitialCards(){
-    return fetch("https://mesto.nomoreparties.co/v1/cohort-20/cards", {
-      headers: this._headers
-    })
-    .then((res) => {
-      return res.json()
-    })
-  }
+	_onError(res) {
+		if (res.ok) {
+			return res.json();
+		}
+
+		return Promise.reject("Сервер недоступен");
+	}
+
+	getUserInfo() {
+		return fetch(`${this._url}users/me`, {
+			headers: this._headers,
+		}).then(this._onError);
+	}
+
+	getInitialCards() {
+		return fetch(`${this._url}cards`, {
+			headers: this._headers,
+		}).then(this._onError);
+	}
+
+	// addNewCard(data) {
+	// 	return fetch(`${this._url}cards`, {
+	// 		method: "POST",
+	// 		headers: this._headers,
+	//     body: JSON.stringify(data)
+	// 	}).then((res) => {
+	// 		if (res.ok) {
+	// 			return res.json();
+	// 		}
+
+	// 		return Promise.reject("Сервер недоступен");
+	// 	});
+	// }
 }
