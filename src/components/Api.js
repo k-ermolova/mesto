@@ -40,22 +40,19 @@ export default class Api {
 			headers: this._headers,
 			body: JSON.stringify({
 				name: data.name,
-				about: data.about
+				about: data.about,
 			}),
 		}).then(this._onError);
 	}
 
-	// addNewCard(data) {
-	// 	return fetch(`${this._url}cards`, {
-	// 		method: "POST",
-	// 		headers: this._headers,
-	//     body: JSON.stringify(data)
-	// 	}).then((res) => {
-	// 		if (res.ok) {
-	// 			return res.json();
-	// 		}
-
-	// 		return Promise.reject("Сервер недоступен");
-	// 	});
-	// }
+	addNewCard(data) {
+		return fetch(`${this._url}cards`, {
+			method: "POST",
+			headers: this._headers,
+			body: JSON.stringify({
+				name: data.name,
+				link: data.link,
+			}),
+		}).then(this._onError);
+	}
 }

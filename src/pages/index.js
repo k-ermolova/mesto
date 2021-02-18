@@ -60,12 +60,27 @@ popupEdit.setEventListeners();
 const popupAdd = new PopupWithForm({
 	popupSelector: ".popup_add",
 	handleFormSubmit: (data) => {
-		const cardData = {
-			name: data["place-name"],
-			link: data["link"],
-		};
-		const card = createCard(cardData, ".place-template", openImagePopup);
-		cardList.prependItem(card);
+		console.log(data);
+		api
+		.addNewCard(data)
+		.then((res) => {
+			console.log(res);
+			const cardData = {
+				name: res["place-name"],
+				link: res["link"],
+			};
+			const card = createCard(cardData, ".place-template", openImagePopup);
+			cardList.prependItem(card);
+		})
+		.catch((err) => {
+			console.log(err);
+		});
+		// const cardData = {
+		// 	name: data["place-name"],
+		// 	link: data["link"],
+		// };
+		// const card = createCard(cardData, ".place-template", openImagePopup);
+		// cardList.prependItem(card);
 		popupAdd.close();
 	},
 });
