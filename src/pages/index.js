@@ -21,7 +21,7 @@ import {
 	formUpdate,
 	saveUrlButton,
 	avatarButton,
-	profileAvatar
+	profileAvatar,
 } from "../utils/constants.js";
 
 import "./index.css";
@@ -68,13 +68,15 @@ popupAdd.setEventListeners();
 
 const popupUpdate = new PopupWithForm({
 	popupSelector: ".popup_update",
-	handleFormSubmit: (item) => {
-		console.log(item);
-		api.
-		updateAvatar(item)
-		.catch((err) => {
-			console.log(err);
-		});
+	handleFormSubmit: ({ ["avatar-link"]: avatar }) => {
+		api
+			.updateAvatar(avatar)
+			.then((res) => {
+				userInfo.setAvatar(res.avatar);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
 		popupUpdate.close();
 	},
 });
@@ -93,6 +95,16 @@ api
 	.getUserInfo()
 	.then((data) => {
 		userInfo.setUserInfo(data);
+	})
+	.catch((err) => {
+		console.log(err);
+	});
+
+	api
+	.getUserInfo()
+	.then((res) => {
+		console.log(res);
+		userInfo.setAvatar(res.avatar);
 	})
 	.catch((err) => {
 		console.log(err);
