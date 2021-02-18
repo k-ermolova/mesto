@@ -46,7 +46,12 @@ imagePopup.setEventListeners();
 const popupEdit = new PopupWithForm({
 	popupSelector: ".popup_edit",
 	handleFormSubmit: (item) => {
-		userInfo.setUserInfo(item);
+		api.updateUserInfo(item).then((res) => {
+			userInfo.setUserInfo(res);
+		})
+		.catch((err) => {
+			console.log(err);
+		});
 		popupEdit.close();
 	},
 });
@@ -95,16 +100,7 @@ api
 	.getUserInfo()
 	.then((data) => {
 		userInfo.setUserInfo(data);
-	})
-	.catch((err) => {
-		console.log(err);
-	});
-
-	api
-	.getUserInfo()
-	.then((res) => {
-		console.log(res);
-		userInfo.setAvatar(res.avatar);
+		userInfo.setAvatar(data.avatar);
 	})
 	.catch((err) => {
 		console.log(err);
