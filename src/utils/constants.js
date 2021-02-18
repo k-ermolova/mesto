@@ -22,6 +22,12 @@ const addButton = document.querySelector(".profile__add-button");
 
 const placesContainer = document.querySelector(".places__list");
 
+const formUpdate = document.forms["update-avatar"];
+const saveUrlButton = formUpdate.querySelector(".popup__save-button");
+
+const avatarButton = document.querySelector(".profile__avatar-area");
+const profileAvatar = document.querySelector(".profile__avatar");
+
 export {
 	validationConfig,
   formEdit,
@@ -34,4 +40,8 @@ export {
 	savePlaceButton,
 	addButton,
 	placesContainer,
+	formUpdate,
+	saveUrlButton,
+	avatarButton,
+	profileAvatar
 };

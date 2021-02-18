@@ -18,6 +18,10 @@ import {
 	savePlaceButton,
 	addButton,
 	placesContainer,
+	formUpdate,
+	saveUrlButton,
+	avatarButton,
+	profileAvatar
 } from "../utils/constants.js";
 
 import "./index.css";
@@ -32,8 +36,9 @@ const api = new Api({
 
 const formEditValidation = new FormValidator(formEdit, validationConfig);
 const formAddValidation = new FormValidator(formAdd, validationConfig);
+const formUpdateValidation = new FormValidator(formUpdate, validationConfig);
 
-const userInfo = new UserInfo(profileTitle, profileSubtitle);
+const userInfo = new UserInfo(profileTitle, profileSubtitle, profileAvatar);
 
 const imagePopup = new PopupWithImage(".figure-popup");
 imagePopup.setEventListeners();
@@ -61,23 +66,37 @@ const popupAdd = new PopupWithForm({
 });
 popupAdd.setEventListeners();
 
-api
-.getInitialCards()
-.then((data) => {
-	createCardList(data);
-})
-.catch((err) => {
-	console.log(err);
-})
+const popupUpdate = new PopupWithForm({
+	popupSelector: ".popup_update",
+	handleFormSubmit: (item) => {
+		console.log(item);
+		api.
+		updateAvatar(item)
+		.catch((err) => {
+			console.log(err);
+		});
+		popupUpdate.close();
+	},
+});
+popupUpdate.setEventListeners();
 
 api
-.getUserInfo()
-.then((data) => {
-	userInfo.setUserInfo(data);
-})
-.catch((err) => {
-	console.log(err);
-})
+	.getInitialCards()
+	.then((data) => {
+		createCardList(data);
+	})
+	.catch((err) => {
+		console.log(err);
+	});
+
+api
+	.getUserInfo()
+	.then((data) => {
+		userInfo.setUserInfo(data);
+	})
+	.catch((err) => {
+		console.log(err);
+	});
 
 function createCardList(cards) {
 	const cardList = new Section(
@@ -115,9 +134,21 @@ function openFormAdd() {
 	formAddValidation.setButtonState(savePlaceButton, formAdd.checkValidity());
 }
 
+function openFormUpdate() {
+	popupUpdate.open();
+	formUpdateValidation.enableValidation();
+	formUpdateValidation.resetValidityCheck(formUpdate);
+	formUpdate.reset();
+	formUpdateValidation.setButtonState(
+		saveUrlButton,
+		formUpdate.checkValidity()
+	);
+}
+
 function openImagePopup(link, title) {
 	imagePopup.open(title, link);
 }
 
 editButton.addEventListener("click", openFormEdit);
 addButton.addEventListener("click", openFormAdd);
+avatarButton.addEventListener("click", openFormUpdate);
