@@ -21,10 +21,10 @@ export default class Card {
 			.classList.toggle("place__like-button_active");
 	}
 
-	_handleRemoveButton() {
-		this._cardElement.closest(".place").remove();
-		this._cardElement = null;
-	}
+	// _handleRemoveButton() {
+	// 	this._cardElement.closest(".place").remove();
+	// 	this._cardElement = null;
+	// }
 
 	_setEventListeners() {
 		this._cardElement
@@ -33,11 +33,11 @@ export default class Card {
 				this._handleLikeButton();
 			});
 
-		this._cardElement
-			.querySelector(".place__delete-button")
-			.addEventListener("click", () => {
-				this._handleRemoveButton();
-			});
+		// this._cardElement
+		// 	.querySelector(".place__delete-button")
+		// 	.addEventListener("click", () => {
+		// 		this._handleRemoveButton();
+		// 	});
 
 		this._cardImage.addEventListener("click", () => {
 			this._openPopup(this._link, this._title);

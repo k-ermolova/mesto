@@ -1,6 +1,6 @@
 export default class Section {
-	constructor({ data, renderer }, containerSelector) {
-		this._renderedItems = data;
+	constructor({ renderer }, containerSelector) {
+		
 		this._renderer = renderer;
 		this._container = containerSelector;
 	}
@@ -9,8 +9,8 @@ export default class Section {
 		this._container.append(item);
 	}
 
-	renderItems() {
-		this._renderedItems.map((item) => {
+	renderItems(items) {
+		items.map((item) => {
 			this._renderer(item);
 		});
 	}

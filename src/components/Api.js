@@ -9,7 +9,7 @@ export default class Api {
 			return res.json();
 		}
 
-		return Promise.reject("Сервер недоступен");
+		return Promise.reject(`Ошибка: ${res.status}`);
 	}
 
 	getUserInfo() {
@@ -50,9 +50,30 @@ export default class Api {
 			method: "POST",
 			headers: this._headers,
 			body: JSON.stringify({
-				name: data.name,
-				link: data.link,
+				name: data["place-name"],
+				link: data["link"],
 			}),
+		}).then(this._onError);
+	}
+
+	deleteCard(id) {
+		return fetch(`${this._url}cards/${id}`, {
+			method: "DELETE",
+			headers: this._headers,
+		}).then(this._onError);
+	}
+
+	putLike(id) {
+		return fetch(`${this._url}cards/likes/${id}`, {
+			method: "PUT",
+			headers: this._headers,
+		}).then(this._onError);
+	}
+
+	deleteLike(id) {
+		return fetch(`${this._url}cards/likes/${id}`, {
+			method: "DELETE",
+			headers: this._headers,
 		}).then(this._onError);
 	}
 }

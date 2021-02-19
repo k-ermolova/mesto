@@ -5,6 +5,7 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js";
+import PopupWithSubmit from "../components/PopupWithSubmit.js";
 
 import {
 	validationConfig,
@@ -46,12 +47,14 @@ imagePopup.setEventListeners();
 const popupEdit = new PopupWithForm({
 	popupSelector: ".popup_edit",
 	handleFormSubmit: (item) => {
+		popupEdit.renderLoading(true);
 		api.updateUserInfo(item).then((res) => {
 			userInfo.setUserInfo(res);
 		})
 		.catch((err) => {
 			console.log(err);
-		});
+		})
+		.finally(() => popupEdit.renderLoading(false));
 		popupEdit.close();
 	},
 });
@@ -61,26 +64,22 @@ const popupAdd = new PopupWithForm({
 	popupSelector: ".popup_add",
 	handleFormSubmit: (data) => {
 		console.log(data);
+		popupAdd.renderLoading(true);
 		api
 		.addNewCard(data)
 		.then((res) => {
-			console.log(res);
 			const cardData = {
-				name: res["place-name"],
+				name: res["name"],
 				link: res["link"],
 			};
 			const card = createCard(cardData, ".place-template", openImagePopup);
 			cardList.prependItem(card);
+			
 		})
 		.catch((err) => {
 			console.log(err);
-		});
-		// const cardData = {
-		// 	name: data["place-name"],
-		// 	link: data["link"],
-		// };
-		// const card = createCard(cardData, ".place-template", openImagePopup);
-		// cardList.prependItem(card);
+		})
+		.finally(() => popupAdd.renderLoading(false));
 		popupAdd.close();
 	},
 });
@@ -89,6 +88,7 @@ popupAdd.setEventListeners();
 const popupUpdate = new PopupWithForm({
 	popupSelector: ".popup_update",
 	handleFormSubmit: ({ ["avatar-link"]: avatar }) => {
+		popupUpdate.renderLoading(true);
 		api
 			.updateAvatar(avatar)
 			.then((res) => {
@@ -96,16 +96,35 @@ const popupUpdate = new PopupWithForm({
 			})
 			.catch((err) => {
 				console.log(err);
-			});
+			})
+			.finally(() => popupUpdate.renderLoading(false));
 		popupUpdate.close();
 	},
 });
 popupUpdate.setEventListeners();
 
+const popupSubmit = new PopupWithSubmit({
+	popupSelector: ".popup_confirm", 
+	handlePopupSubmit: {
+
+	}
+});
+popupSubmit.setEventListeners();
+
+const cardList = new Section(
+	{
+		renderer: (item) => {
+			const cardItem = createCard(item, ".place-template", openImagePopup);
+			cardList.addItem(cardItem);
+		},
+	},
+	placesContainer
+);
+
 api
 	.getInitialCards()
 	.then((data) => {
-		createCardList(data);
+		cardList.renderItems(data)
 	})
 	.catch((err) => {
 		console.log(err);
@@ -120,20 +139,6 @@ api
 	.catch((err) => {
 		console.log(err);
 	});
-
-function createCardList(cards) {
-	const cardList = new Section(
-		{
-			data: cards,
-			renderer: (item) => {
-				const cardItem = createCard(item, ".place-template", openImagePopup);
-				cardList.addItem(cardItem);
-			},
-		},
-		placesContainer
-	);
-	cardList.renderItems();
-}
 
 function createCard(item, cardSelector, handleCardClick) {
 	const card = new Card(item, cardSelector, handleCardClick).generateCard();
