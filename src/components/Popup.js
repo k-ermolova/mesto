@@ -1,3 +1,5 @@
+import { esc } from "../utils/constants.js"
+
 export default class Popup {
 	constructor(popupSelector) {
 		this._popup = document.querySelector(popupSelector);
@@ -18,7 +20,7 @@ export default class Popup {
 	}
 
 	_handleEscClose(evt) {
-		if (evt.key === "Escape") {
+		if (evt.key === esc) {
 			this.close();
 		}
 	}
@@ -26,15 +28,6 @@ export default class Popup {
 	_handleOverlayClose(evt) {
 		if (evt.target.classList.contains("popup_opened")) {
 			this.close();
-		}
-	}
-
-	renderLoading(isLoading) {
-		const saveButton = this._popup.querySelector(".popup__save-button");
-		if (isLoading) {
-			saveButton.textContent = "Сохранение...";
-		} else {
-			saveButton.textContent = "Сохранить";
 		}
 	}
 

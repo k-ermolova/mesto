@@ -17,16 +17,16 @@ const jobInput = formEdit.querySelector(".input-text_type_job");
 
 const formAdd = document.forms["add-form"];
 
-const savePlaceButton = formAdd.querySelector(".popup__save-button");
 const addButton = document.querySelector(".profile__add-button");
 
 const placesContainer = document.querySelector(".places__list");
 
 const formUpdate = document.forms["update-avatar"];
-const saveUrlButton = formUpdate.querySelector(".popup__save-button");
 
 const avatarButton = document.querySelector(".profile__avatar-area");
 const profileAvatar = document.querySelector(".profile__avatar");
+
+const esc = "Escape";
 
 export {
 	validationConfig,
@@ -37,11 +37,10 @@ export {
 	nameInput,
 	jobInput,
   formAdd,
-	savePlaceButton,
 	addButton,
 	placesContainer,
 	formUpdate,
-	saveUrlButton,
 	avatarButton,
-	profileAvatar
+	profileAvatar,
+	esc
 };

@@ -16,11 +16,9 @@ import {
 	nameInput,
 	jobInput,
 	formAdd,
-	savePlaceButton,
 	addButton,
 	placesContainer,
 	formUpdate,
-	saveUrlButton,
 	avatarButton,
 	profileAvatar,
 } from "../utils/constants.js";
@@ -41,6 +39,10 @@ const formEditValidation = new FormValidator(formEdit, validationConfig);
 const formAddValidation = new FormValidator(formAdd, validationConfig);
 const formUpdateValidation = new FormValidator(formUpdate, validationConfig);
 
+formEditValidation.enableValidation();
+formAddValidation.enableValidation();
+formUpdateValidation.enableValidation();
+
 const userInfo = new UserInfo(profileTitle, profileSubtitle, profileAvatar);
 
 const imagePopup = new PopupWithImage(".figure-popup");
@@ -54,12 +56,12 @@ const popupEdit = new PopupWithForm({
 			.updateUserInfo(item)
 			.then((res) => {
 				userInfo.setUserInfo(res);
+				popupEdit.close();
 			})
 			.catch((err) => {
 				console.log(err);
 			})
 			.finally(() => popupEdit.renderLoading(false));
-		popupEdit.close();
 	},
 });
 popupEdit.setEventListeners();
@@ -86,17 +88,18 @@ popupAdd.setEventListeners();
 const popupUpdate = new PopupWithForm({
 	popupSelector: ".popup_update",
 	handleFormSubmit: ({ ["avatar-link"]: avatar }) => {
+		console.log();
 		popupUpdate.renderLoading(true);
 		api
 			.updateAvatar(avatar)
 			.then((res) => {
 				userInfo.setAvatar(res.avatar);
+				popupUpdate.close();
 			})
 			.catch((err) => {
 				console.log(err);
 			})
 			.finally(() => popupUpdate.renderLoading(false));
-		popupUpdate.close();
 	},
 });
 popupUpdate.setEventListeners();
@@ -105,14 +108,14 @@ const popupSubmit = new PopupWithSubmit({
 	popupSelector: ".popup_confirm",
 	handlePopupSubmit: () => {
 		api
-			.deleteCard(popupSubmit._cardId)
+			.deleteCard(popupSubmit.cardId)
 			.then(() => {
-				popupSubmit._cardElement.remove();
+				popupSubmit.cardElement.remove();
+				popupSubmit.close();
 			})
 			.catch((err) => {
 				console.log(err);
 			});
-		popupSubmit.close();
 	},
 });
 popupSubmit.setEventListeners();
@@ -127,25 +130,13 @@ const cardList = new Section(
 	placesContainer
 );
 
-api
-	.getInitialCards()
-	.then((data) => {
-		cardList.renderItems(data);
-	})
-	.catch((err) => {
-		console.log(err);
-	});
-
-api
-	.getUserInfo()
-	.then((data) => {
-		userInfo.setUserInfo(data);
-		userInfo.setAvatar(data.avatar);
-		userId = data._id;
-	})
-	.catch((err) => {
-		console.log(err);
-	});
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+.then(([userData, cards]) => {
+	userInfo.setUserInfo(userData);
+		userInfo.setAvatar(userData.avatar);
+		userId = userData._id;
+		cardList.renderItems(cards)
+})
 
 function createCard(item) {
 	const card = new Card(
@@ -153,10 +144,37 @@ function createCard(item) {
 		userId,
 		".place-template",
 		() => imagePopup.open(item.name, item.link),
+		handleLikeButton,
 		() => popupSubmit.open(item, card),
 		api
 	).generateCard();
 	return card;
+}
+
+function handleLikeButton(likeButton, cardId, cardLikes, likeCounter) {
+	if (likeButton.classList.contains("place__like-button_active")) {
+		api
+			.deleteLike(cardId)
+			.then((res) => {
+				likeButton.classList.toggle("place__like-button_active");
+				cardLikes.length = res.likes.length;
+				likeCounter.textContent = cardLikes.length;
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	} else {
+		api
+			.putLike(cardId)
+			.then((res) => {
+				likeButton.classList.toggle("place__like-button_active");
+				cardLikes.length = res.likes.length;
+				likeCounter.textContent = cardLikes.length;
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	}
 }
 
 function openFormEdit() {
@@ -164,27 +182,21 @@ function openFormEdit() {
 	nameInput.value = profileInfo.name;
 	jobInput.value = profileInfo.about;
 	popupEdit.open();
-	formEditValidation.enableValidation();
-	formEditValidation.resetValidityCheck(formEdit);
+	formEditValidation.resetValidityCheck();
 }
 
 function openFormAdd() {
 	popupAdd.open();
-	formAddValidation.enableValidation();
-	formAddValidation.resetValidityCheck(formAdd);
+	formAddValidation.resetValidityCheck();
 	formAdd.reset();
-	formAddValidation.setButtonState(savePlaceButton, formAdd.checkValidity());
+	formAddValidation.setButtonState();
 }
 
 function openFormUpdate() {
 	popupUpdate.open();
-	formUpdateValidation.enableValidation();
-	formUpdateValidation.resetValidityCheck(formUpdate);
+	formUpdateValidation.resetValidityCheck();
 	formUpdate.reset();
-	formUpdateValidation.setButtonState(
-		saveUrlButton,
-		formUpdate.checkValidity()
-	);
+	formUpdateValidation.setButtonState();
 }
 
 editButton.addEventListener("click", openFormEdit);
