@@ -5,8 +5,7 @@ export default class Card {
 		cardSelector,
 		handleCardClick,
 		handleLikeClick,
-		handleDeleteIconClick,
-		// api
+		handleDeleteIconClick
 	) {
 		this._data = data;
 		this._title = data.name;
@@ -19,7 +18,6 @@ export default class Card {
 		this._handleCardClick = handleCardClick;
 		this._handleLikeClick = handleLikeClick;
 		this._handleDeleteIconClick = handleDeleteIconClick;
-		// this._api = api;
 	}
 
 	_getTemplate() {
@@ -51,7 +49,12 @@ export default class Card {
 
 	_setEventListeners() {
 		this._likeButton.addEventListener("click", () => {
-			this._handleLikeClick(this._likeButton, this._id, this._likes, this._likeCounter);
+			this._handleLikeClick(
+				this._likeButton,
+				this._id,
+				this._likes,
+				this._likeCounter
+			);
 		});
 
 		this._cardImage.addEventListener("click", () => {

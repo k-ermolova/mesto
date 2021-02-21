@@ -130,13 +130,14 @@ const cardList = new Section(
 	placesContainer
 );
 
-Promise.all([api.getUserInfo(), api.getInitialCards()])
-.then(([userData, cards]) => {
-	userInfo.setUserInfo(userData);
+Promise.all([api.getUserInfo(), api.getInitialCards()]).then(
+	([userData, cards]) => {
+		userInfo.setUserInfo(userData);
 		userInfo.setAvatar(userData.avatar);
 		userId = userData._id;
-		cardList.renderItems(cards)
-})
+		cardList.renderItems(cards);
+	}
+);
 
 function createCard(item) {
 	const card = new Card(
