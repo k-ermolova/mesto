@@ -27,6 +27,8 @@ import {
 
 import "./index.css";
 
+let userId;
+
 const api = new Api({
 	baseUrl: "https://mesto.nomoreparties.co/v1/cohort-20/",
 	headers: {
@@ -48,13 +50,15 @@ const popupEdit = new PopupWithForm({
 	popupSelector: ".popup_edit",
 	handleFormSubmit: (item) => {
 		popupEdit.renderLoading(true);
-		api.updateUserInfo(item).then((res) => {
-			userInfo.setUserInfo(res);
-		})
-		.catch((err) => {
-			console.log(err);
-		})
-		.finally(() => popupEdit.renderLoading(false));
+		api
+			.updateUserInfo(item)
+			.then((res) => {
+				userInfo.setUserInfo(res);
+			})
+			.catch((err) => {
+				console.log(err);
+			})
+			.finally(() => popupEdit.renderLoading(false));
 		popupEdit.close();
 	},
 });
@@ -63,24 +67,18 @@ popupEdit.setEventListeners();
 const popupAdd = new PopupWithForm({
 	popupSelector: ".popup_add",
 	handleFormSubmit: (data) => {
-		console.log(data);
 		popupAdd.renderLoading(true);
 		api
-		.addNewCard(data)
-		.then((res) => {
-			const cardData = {
-				name: res["name"],
-				link: res["link"],
-			};
-			const card = createCard(cardData, ".place-template", openImagePopup);
-			cardList.prependItem(card);
-			
-		})
-		.catch((err) => {
-			console.log(err);
-		})
-		.finally(() => popupAdd.renderLoading(false));
-		popupAdd.close();
+			.addNewCard(data)
+			.then((res) => {
+				const card = createCard(res);
+				cardList.prependItem(card);
+				popupAdd.close();
+			})
+			.catch((err) => {
+				console.log(err);
+			})
+			.finally(() => popupAdd.renderLoading(false));
 	},
 });
 popupAdd.setEventListeners();
@@ -104,17 +102,25 @@ const popupUpdate = new PopupWithForm({
 popupUpdate.setEventListeners();
 
 const popupSubmit = new PopupWithSubmit({
-	popupSelector: ".popup_confirm", 
-	handlePopupSubmit: {
-
-	}
+	popupSelector: ".popup_confirm",
+	handlePopupSubmit: () => {
+		api
+			.deleteCard(popupSubmit._cardId)
+			.then(() => {
+				popupSubmit._cardElement.remove();
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+		popupSubmit.close();
+	},
 });
 popupSubmit.setEventListeners();
 
 const cardList = new Section(
 	{
 		renderer: (item) => {
-			const cardItem = createCard(item, ".place-template", openImagePopup);
+			const cardItem = createCard(item);
 			cardList.addItem(cardItem);
 		},
 	},
@@ -124,7 +130,7 @@ const cardList = new Section(
 api
 	.getInitialCards()
 	.then((data) => {
-		cardList.renderItems(data)
+		cardList.renderItems(data);
 	})
 	.catch((err) => {
 		console.log(err);
@@ -135,13 +141,21 @@ api
 	.then((data) => {
 		userInfo.setUserInfo(data);
 		userInfo.setAvatar(data.avatar);
+		userId = data._id;
 	})
 	.catch((err) => {
 		console.log(err);
 	});
 
-function createCard(item, cardSelector, handleCardClick) {
-	const card = new Card(item, cardSelector, handleCardClick).generateCard();
+function createCard(item) {
+	const card = new Card(
+		item,
+		userId,
+		".place-template",
+		() => imagePopup.open(item.name, item.link),
+		() => popupSubmit.open(item, card),
+		api
+	).generateCard();
 	return card;
 }
 
@@ -171,10 +185,6 @@ function openFormUpdate() {
 		saveUrlButton,
 		formUpdate.checkValidity()
 	);
-}
-
-function openImagePopup(link, title) {
-	imagePopup.open(title, link);
 }
 
 editButton.addEventListener("click", openFormEdit);
