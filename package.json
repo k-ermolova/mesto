@@ -30,11 +30,11 @@
     "postcss-loader": "^5.0.0",
     "webpack": "^5.21.2",
     "webpack-cli": "^4.5.0",
-    "webpack-dev-server": "^3.11.2"
-  },
-  "dependencies": {
-    "core-js": "^3.8.3",
+    "webpack-dev-server": "^3.11.2",
     "css": "^3.0.0",
     "loader": "^2.1.1"
+  },
+  "dependencies": {
+    "core-js": "^3.8.3"
   }
 }
