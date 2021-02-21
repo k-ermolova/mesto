@@ -17,14 +17,16 @@
 		<main class="content">
 			<section class="profile content__profile">
 				<div class="profile__container">
-					<img
-						class="profile__avatar"
-						src="<%=require('./images/profile__avatar.jpg')%>"
-						alt="Фотография профиля Жака-Ива Кусто."
-					/>
+					<div class="profile__avatar-area">
+						<img
+							class="profile__avatar"
+							src="<%=require('./images/profile__avatar.jpg')%>"
+							alt="Фотография профиля."
+						/>
+					</div>
 					<div class="profile__info">
-						<h1 class="profile__title">Жак-Ив Кусто</h1>
-						<p class="profile__subtitle">Исследователь океана</p>
+						<h1 class="profile__title"></h1>
+						<p class="profile__subtitle"></p>
 						<button
 							class="profile__edit-button"
 							type="button"
@@ -70,12 +72,12 @@
 						type="text"
 						class="input-text input-text_type_job popup__job"
 						placeholder="О себе"
-						name="job"
+						name="about"
 						required
 						minlength="2"
 						maxlength="200"
 					/>
-					<span id="job-error" class="popup__error"></span>
+					<span id="about-error" class="popup__error"></span>
 				</fieldset>
 				<button class="popup__save-button" type="submit">Сохранить</button>
 			</form>
@@ -130,6 +132,44 @@
 				<figcaption class="popup__description">Архыз</figcaption>
 			</figure>
 		</div>
+		<div class="popup popup_confirm">
+			<form name="confirm" class="popup__container popup__container_confirm">
+				<button
+					class="popup__close-button popup__close-button_position_top"
+				></button>
+				<h2 class="popup__heading popup__heading_confirm">Вы уверены?</h2>
+				<button
+					class="popup__save-button popup__save-button_confirm"
+					type="submit"
+				>
+					Да
+				</button>
+			</form>
+		</div>
+		<div class="popup popup_update">
+			<form name="update-avatar" class="popup__container" novalidate>
+				<button
+					class="popup__close-button popup__close-button_position_top"
+				></button>
+				<h2 class="popup__heading popup__heading_update">Обновить аватар</h2>
+				<fieldset class="popup__info">
+					<input
+						type="url"
+						class="input-text input-text_type_link popup__link"
+						placeholder="Ссылка на картинку"
+						name="avatar-link"
+						required
+					/>
+					<span id="avatar-link-error" class="popup__error"></span>
+				</fieldset>
+				<button
+					class="popup__save-button popup__save-button_update"
+					type="submit"
+				>
+					Сохранить
+				</button>
+			</form>
+		</div>
 		<template class="place-template">
 			<li class="place">
 				<button
@@ -144,11 +184,14 @@
 				/>
 				<div class="place__description">
 					<h3 class="place__title">Архыз</h3>
-					<button
-						type="button"
-						class="place__like-button"
-						aria-label="Понравилось"
-					></button>
+					<div class="place__like">
+						<button
+							type="button"
+							class="place__like-button"
+							aria-label="Понравилось"
+						></button>
+						<span class="place__like-counter">1</span>
+					</div>
 				</div>
 			</li>
 		</template>
