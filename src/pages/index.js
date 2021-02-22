@@ -88,7 +88,6 @@ popupAdd.setEventListeners();
 const popupUpdate = new PopupWithForm({
 	popupSelector: ".popup_update",
 	handleFormSubmit: ({ ["avatar-link"]: avatar }) => {
-		console.log();
 		popupUpdate.renderLoading(true);
 		api
 			.updateAvatar(avatar)
