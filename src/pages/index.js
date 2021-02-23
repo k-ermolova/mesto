@@ -88,7 +88,6 @@ popupAdd.setEventListeners();
 const popupUpdate = new PopupWithForm({
 	popupSelector: ".popup_update",
 	handleFormSubmit: ({ ["avatar-link"]: avatar }) => {
-		console.log();
 		popupUpdate.renderLoading(true);
 		api
 			.updateAvatar(avatar)
@@ -130,13 +129,14 @@ const cardList = new Section(
 	placesContainer
 );
 
-Promise.all([api.getUserInfo(), api.getInitialCards()])
-.then(([userData, cards]) => {
-	userInfo.setUserInfo(userData);
+Promise.all([api.getUserInfo(), api.getInitialCards()]).then(
+	([userData, cards]) => {
+		userInfo.setUserInfo(userData);
 		userInfo.setAvatar(userData.avatar);
 		userId = userData._id;
-		cardList.renderItems(cards)
-})
+		cardList.renderItems(cards);
+	}
+);
 
 function createCard(item) {
 	const card = new Card(

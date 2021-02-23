@@ -30,17 +30,17 @@ const esc = "Escape";
 
 export {
 	validationConfig,
-  formEdit,
+	formEdit,
 	editButton,
 	profileTitle,
 	profileSubtitle,
 	nameInput,
 	jobInput,
-  formAdd,
+	formAdd,
 	addButton,
 	placesContainer,
 	formUpdate,
 	avatarButton,
 	profileAvatar,
-	esc
+	esc,
 };
