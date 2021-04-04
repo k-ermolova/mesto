@@ -9,5 +9,5 @@
 * JavaScript
 
 ## Как посмотреть
-1. Перейти по [ссылке](https://mysoulterious.github.io/mesto/). 
+1. Перейти по [ссылке](https://k-ermolova.github.io/mesto/). 
 2. Загрузить архив и открыть файл index.html в любом браузере.
