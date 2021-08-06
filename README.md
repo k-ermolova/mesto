@@ -9,5 +9,6 @@
 * JavaScript
 
 ## Как посмотреть
-1. Перейти по [ссылке](https://k-ermolova.github.io/mesto/). 
-2. Загрузить архив и открыть файл index.html в любом браузере.
+* Перейти по [ссылке](https://k-ermolova.github.io/mesto/)
+* 1. `git clone https://github.com/k-ermolova/mesto.git` | Скачать [ZIP-архив](https://github.com/k-ermolova/mesto/archive/refs/heads/main.zip), распаковать
+  2. Oткрыть файл `index.html` в браузере
